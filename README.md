@@ -13,7 +13,7 @@ Web3 기반으로 커뮤니티 활동을 하면 토큰을 주는 형식으로 �
  
  <tr>
   <td align='center'>이범혁</td>
-  <td align='center'>팀장, Back-end</td>
+  <td align='center'>Back-end</td>
   <td align='center'><a href="https://github.com/Beomhyuck">Beomhyuck</a></td>
   <td align='center'>dlqjagur2@gmail.com</td>
  </tr>   
@@ -27,7 +27,7 @@ Web3 기반으로 커뮤니티 활동을 하면 토큰을 주는 형식으로 �
 
   <tr>
   <td align='center'>송해현</td>
-  <td align='center'>Back-end</td>
+  <td align='center'>팀장, Back-end</td>
   <td align='center'><a href="https://github.com/2h-Song">2h_Song</a></td>
   <td align='center'>song980519@gmail.com</td>
  </tr>
