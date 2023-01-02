@@ -1,0 +1,54 @@
+.header{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: fixed;
+    top:0;
+    width: 100vw;
+    background-color: white;
+    gap:200px;
+}
+#logo{
+    width: 50px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.menuItems{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.menuBTN{
+    display: flex;
+    align-content: center;
+    align-items: center; 
+}
+.menu{
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+
+}
+
+.loginBTN{
+    width: 100px;
+    height: 30px;
+    margin-left: 30px;
+    border:none;
+
+}
+
+.loginBTN:hover{
+    cursor: pointer;
+}
+
+.joinBTN{
+    width: 100px;
+    height: 30px;
+    margin-left: 30px;
+    border:none;
+}
+.joinBTN:hover{
+    cursor: pointer;
+}
