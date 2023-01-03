@@ -11,10 +11,10 @@ router.post('/',async (req,res)=>{
     // db.user_id, user_password, user_nickname 에 저장 or 검색해서 중복되는 결과가 있는지 확인
 
     if(db.user_id == user_id){
-        res.status(406).send({status:"Failed", message:"id가 중복되어 있습니다."})
+        res.status(406).send({status:"failed", message:"id가 중복되어 있습니다."})
     }
     else if(db.user_nickname == user_nickname){
-        res.status(406).send({status:"Failed", message:"닉넴임이 중복되어 있습니다."})
+        res.status(406).send({status:"failed", message:"닉넴임이 중복되어 있습니다."})
     }
     else{
         let mnemonic;              
@@ -46,7 +46,7 @@ router.post('/',async (req,res)=>{
                 })
             }
         );
-        res.status(200).send({status:"Success"});
+        res.status(200).send({status:"success"});
     }
     
 })

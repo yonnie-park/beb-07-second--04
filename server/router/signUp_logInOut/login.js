@@ -35,12 +35,12 @@ router.post('/', async(req, res)=>{
 
         if(year == dbTime_year && month == dbTime_month && day == dbTime_day){
             // 10 토큰 전송
-            return res.status(200).send({sataus:"Success", message:"첫 로그인 10토큰 지급 완료"});
+            return res.status(200).send({status:"success", message:"첫 로그인 10토큰 지급 완료"});
         }
-        return res.status(200).send({status:"Success"})
+        return res.status(200).send({status:"success"})
     }
     else{
-        return res.status(400).send({status:"Failed", message:"아이디, 비밀번호가 일치하지 않습니다."});
+        return res.status(400).send({status:"failed", message:"아이디, 비밀번호가 일치하지 않습니다."});
     }
     
 });
