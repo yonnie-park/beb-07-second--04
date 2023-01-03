@@ -30,7 +30,7 @@ export default function Signup() {
             userInfo.user_password &&
             userInfo.user_nickname
         ){
-            axios.post("http://localhost:8080/signup", userInfo)
+            axios.post("http://localhost:8080/signUp", userInfo)
             .then((result)=>{
                 console.log(result.data.status)
                 result.data.status==="success"? isSigninSuccess=true : isSigninSuccess=false
