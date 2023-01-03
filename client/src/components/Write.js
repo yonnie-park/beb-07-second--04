@@ -3,7 +3,6 @@ import dummyData from "../resources/dummyData"
 import "./Write.css"
 
 export default function Write() {
-  const date= Date.now()
   const [tweet, setTweet] = useState('');
 
   const handleChange = (event) => {
@@ -26,7 +25,7 @@ export default function Write() {
             <div id='profile'>
               <img id="profPic" src={e.imgUrl} alt="profile"/>
               <div id="name">{e.user_nickname}</div>
-              <p>{date}</p>
+              <div id="userid">{`@`+ e.user_id}</div>
             </div>
           )
         })}
