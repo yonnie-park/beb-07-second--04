@@ -1,24 +1,26 @@
-import React, {useState} from 'react';
-import './Tweet.css';
+import React, { useState } from 'react';
+import dummyData from "../resources/dummyData"
+import "./Tweet.css"
 
-const Tweet = ({ tweet }) => {
+export default function Tweet() {
   return (
-    <li className="tweet" id={tweet.user_id}>
-      <div className="tweet__profile">
-        <img src={tweet.imgUrl} alt="userprofile" />
+    <div className='tweet'>
+      <div >
+        {dummyData.map((e)=>{
+          return(
+            <div id='contentCover'>
+              <div id="profile">
+                <img id="profPic" src={e.imgUrl} alt="profile"/>
+                <div id="name">{e.user_nickname}</div>
+                <div id="userid">{`@`+ e.user_id}</div>
+              </div>
+              <div id="content">{e.content}</div>
+            </div>
+          )
+        })}
       </div>
-      <div className="tweet__content">
-        <div className="tweet__userInfo">
-          <div className="tweet__userInfo--wrapper">
-            <span className='tweet__username'>{tweet.user_nickname}</span>
-          </div>
-        </div>
-        <div >
-            <span className="tweet__message">{tweet.content}</span>
-        </div>
-      </div>
-    </li>
+      
+    </div>
+    
   );
-};
-
-export default Tweet;
+}
