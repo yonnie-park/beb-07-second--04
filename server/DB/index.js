@@ -12,8 +12,9 @@ const con = mysql.createConnection(
   }
 );
 
-con.connect((err) => {
-  if (err) throw err;
-});
+con.connect(() => {
+  console.log("db init success");
+})
+.catch((error) => console.log(error));
 
 module.exports = con;
