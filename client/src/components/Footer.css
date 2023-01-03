@@ -1,5 +1,18 @@
 .Footer{
     width: 100%;
     padding-top: 20px;
-    background-color: #f1faee;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+#githublogo{
+    width: 30px;
+    margin: 30px;
+}
+#githublogo:hover{
+    cursor: pointer;
 }
