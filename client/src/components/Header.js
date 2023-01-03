@@ -10,7 +10,7 @@ export default function Header(){
                 <Link to="/mypage" className="menu">My Page</Link>
             <div className="menuBTN">
                 <Link to="/login"><button className="loginBTN">Login</button></Link>
-                <Link to="/join"><button className="joinBTN">Join</button></Link>
+                <Link to="/signup"><button className="joinBTN">Sign up</button></Link>
             </div>
         </div>
     )

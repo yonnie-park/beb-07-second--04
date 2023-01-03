@@ -1,6 +1,6 @@
 .container{
     min-height: 100vh;
-    margin-top: 150px;
+    margin-top: 100px;
     margin-bottom: 150px;
     display: flex;
     justify-content: center;
@@ -8,18 +8,3 @@
 
 }
 
-.join{
-    display: flex;
-    flex-direction: column;
-}
-
-.form{
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-}
-
-.inputBox{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
