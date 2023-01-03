@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cors = require('cors');
+const session = require('express-session');
 
 const apiRouter = require('./router/api');
 
@@ -10,6 +11,23 @@ http.listen(8080, function () {
   console.log(`listening port 8080`);
 });
 
+
+// 세션을 사용해서 로그인
+app.use(
+  session({
+    secret:'snorlax',
+    resave: false,
+    saveUninitialized: true,
+    cookie:{
+      domain: 'localhost',
+      path:'/',
+      maxAge: 24*6*60*10000,
+      sameSite: 'NONE',
+      httpOnly: false,
+      secure: false
+    }
+  })
+)
 
 app.use(express.json());
 // app.use(cors());
