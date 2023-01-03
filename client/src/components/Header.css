@@ -53,9 +53,9 @@
     border:none;
     border-radius: 20px;
     color: white;
-    background-color: gray;
+    background-color: #e63946;
 }
 .joinBTN:hover{
     cursor: pointer;
-    background-color: #e63946;
+
 }

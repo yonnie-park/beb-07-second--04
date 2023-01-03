@@ -4,7 +4,6 @@ import "./Write.css"
 
 export default function Write() {
   const [tweet, setTweet] = useState('');
-
   const handleChange = (event) => {
     setTweet(event.target.value);
   }
