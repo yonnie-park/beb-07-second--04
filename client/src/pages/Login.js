@@ -1,9 +1,9 @@
 import { React, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-export default function View() {
+export default function Login() {
     return(
         <div className="container">
-        viewPage
+        login
         </div>
     )
 }
