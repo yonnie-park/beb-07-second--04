@@ -15,7 +15,7 @@ router.post('/',async (req,res)=>{
     // db.user_id, user_password, user_nickname 에 저장 or 검색해서 중복되는 결과가 있는지 확인
     
     if (db.user_id && db.user_password && db.user_nickname) {
-        db.query('SELECT * FROM user WHERE user_id =? AND user_nickname', 
+        db.query('SELECT * FROM user WHERE user_id =? AND user_nickname =?', 
         [user_id, user_nickname], function(err,results,fields){ // 중복 확인
             if(err) throw err;
             if(results.length <=0 && user_password) {
