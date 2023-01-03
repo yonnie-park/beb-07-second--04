@@ -35,10 +35,10 @@ router.post('/',async (req,res)=>{
     }
 
     if(db.user_id == user_id){
-        res.status(406).send({status:"Failed", message:"중복된 ID 입니다"})
+        res.status(406).send({status:"failed", message:"중복된 ID 입니다"})
     }
     else if(db.user_nickname == user_nickname){
-        res.status(406).send({status:"Failed", message:"중복된 닉네임 입니다"})
+        res.status(406).send({status:"failed", message:"중복된 닉네임 입니다"})
     }
     else{
         let mnemonic;              
@@ -70,7 +70,7 @@ router.post('/',async (req,res)=>{
                 })
             }
         );
-        res.status(200).send({status:"Success"});
+        res.status(200).send({status:"success"});
     }
     
 })
