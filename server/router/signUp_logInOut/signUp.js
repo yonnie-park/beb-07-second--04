@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = {user_id:"1", user_password:"2", user_nickname:"3"};
-import { con } from "../../DB/index"
+const user = require("../../DB/Entity/user");
 
 
 
@@ -11,27 +11,14 @@ router.post('/',async (req,res)=>{
 
     //db에서 정보 검색해서
     // db.user_id, user_password, user_nickname 에 저장 or 검색해서 중복되는 결과가 있는지 확인
-
-    exports.insert = ( data, cb ) => {
-        const loginData = `INSERT INTO user VALUES 
-        ('${data.id}', '${data.user_password}', '${data.user_nickname}', '${data.user_accountAddress}', '${user_profileImg}' )`
     
-        con.query(loginData, (err, rows)=> { // DB에 저장
-            if(err) throw err;
-            cb( data.id, data.user_nickname, data.user_password, data.user_accountAddress, data.user_profileImg );
-        });
-    }
+    exports.post_user = (req, res) => { 
+        // post 방식으로 정보를 입력 > DB에 정보를 저장
+        // user.js에서 limit1 로 설정
 
-    exports.select = ( id, user_nickname, user_accountAddress, cb) => {
-        const onlySQL =`SELECT * FROM user WHERE id='${id} AND
-                    user_nickname='${user_nickname} AND
-                    user_accountAddress='${user_accountAddress}
-                    limit 1`; // 중복 id X 
-                    
-        con.query(onlySQL, (err, rows) => {
-            if (err) throw err;
-            cb( rows[0] );
-        });
+        user.insert( req.body, function (result) { 
+            res.send({ user_id,user_nickname,user_password: result});
+        })
     }
 
     if(db.user_id == user_id){
