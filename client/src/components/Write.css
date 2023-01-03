@@ -1,0 +1,62 @@
+.write{
+    background-color: white;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.2);
+    width: 800px;
+    height: 350px;
+    padding: 30px;
+    border-radius: 30px;
+}
+#profPic{
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    object-fit: cover
+}
+#profile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+}
+
+#name{
+    font-weight: bold;
+}
+
+#tweetForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+#tweetbox{
+    width: 700px;
+    border: none;
+    height: 150px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+}
+
+#tweetBTN{
+    width: 100px;
+    margin-top: 20px;
+    border:none;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #e63946;
+    position: relative;
+    left: 85%
+}
+#tweetBTN:hover{
+    cursor: pointer;
+}
+
+#tweetBTN:disabled{
+    opacity: 50%;
+}
