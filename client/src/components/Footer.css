@@ -16,3 +16,8 @@
 #githublogo:hover{
     cursor: pointer;
 }
+
+#emoji{
+    width: 30px;
+    margin: 30px;
+}
