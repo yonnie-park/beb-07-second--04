@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const db = {user_id:"1", user_password:"2", user_nickname:"3"};
-const user = require("../../DB/Entity/user");
+// const db = {user_id:"1", user_password:"2", user_nickname:"3"};
+// const user = require("../../DB/Entity/user"); // user DB
+const db = require("../../DB/db");
 
 
 
@@ -9,15 +10,20 @@ router.post('/',async (req,res)=>{
     const {user_id,user_password,user_nickname} = req.body;
     console.log(user_id,user_password,user_nickname);
 
+
     //db에서 정보 검색해서
     // db.user_id, user_password, user_nickname 에 저장 or 검색해서 중복되는 결과가 있는지 확인
     
-    exports.post_user = (req, res) => { 
-        // post 방식으로 정보를 입력 > DB에 정보를 저장
-        // user.js에서 limit1 로 설정
-
-        user.insert( req.body, function (result) { 
-            res.send({ user_id,user_nickname,user_password: result});
+    if (db.user_id && db.user_password && db.user_nickname) {
+        db.query('SELECT * FROM user WHERE user_id =?', [user_id], function(err,results, fields){
+            if(err) throw err;
+            if(results.length <=0 && user_password) {
+                db.query('INSERT INTO user (user_id, user_password, user_nickname) VALUES(?,?,?'), 
+                [user_id,user_password,user_nickname], function(err,data){
+                    if(err) throw err;
+                    res.send("회원가입이 완료되었습니다")
+                } 
+            } 
         })
     }
 
@@ -50,6 +56,15 @@ router.post('/',async (req,res)=>{
                         else{
 
                             //지갑 db에 저장하는 부분 구현 필요
+                            const {user_accountAddress} = req.body;
+                            console.log(user_accountAddress);
+                            if(db.user_accountAddress) {
+                                db.query('INSER INTO user (user_accountAddress) VALUES (?)'),
+                                [user_accountAddress], function (err,data) {
+                                    if(err) throw err;
+                                    res.send('지갑 생성 성공')
+                                }
+                            }
                             console.log(keystore);
                             console.log("지갑 생성 성공");
                         }
