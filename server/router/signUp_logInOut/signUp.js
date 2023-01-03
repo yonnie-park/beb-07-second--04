@@ -17,7 +17,7 @@ router.post('/',async (req,res)=>{
         res.status(406).send({status:"Failed", message:"닉넴임이 중복되어 있습니다."})
     }
     else{
-        let mnemonic;
+        let mnemonic;              
         mnemonic = lightwallet.keystore.generateRandomSeed();
         lightwallet.keystore.createVault(
             {
@@ -39,7 +39,7 @@ router.post('/',async (req,res)=>{
                         else{
 
                             //지갑 db에 저장하는 부분 구현 필요
-
+                            console.log(keystore);
                             console.log("지갑 생성 성공");
                         }
                     })
