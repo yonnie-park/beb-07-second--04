@@ -1,4 +1,4 @@
-const SimpleToken = artifacts.require("SimpleToken");
+const SimpleToken = artifacts.require("SnorLaxToken");
 module.exports = function (deployer) {
-  deployer.deploy(SimpleToken);
+  deployer.deploy(SnorLaxToken);
 };

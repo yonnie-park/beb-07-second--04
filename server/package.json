@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "type":"commonjs",
+  "type": "commonjs",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.2.2",
     "cors": "^2.8.5",
     "date-utils": "^1.2.21",
+    "dotenv": "^16.0.3",
+    "eth-lightwallet": "^4.0.0",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "lightwallet": "^1.0.4",
     "mysql": "^2.18.1"
   }
 }
