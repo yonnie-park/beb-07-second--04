@@ -12,9 +12,7 @@ export default function Login() {
     const [loginInfo, setLoginInfo] = useState({
         user_id: "",
         user_password: ""
-    })
-    const [isSigninSuccess, setSigninSuccess] = useState(false) //이게왜안되지
-    
+    })   
 
     const handleInputValue = (key) => (e) => {
         setLoginInfo({...loginInfo, [key]: e.target.value})
@@ -34,7 +32,7 @@ export default function Login() {
                 result.data.status==="success" ? isSigninSuccess=true : isSigninSuccess=false
             })
             .then(() => {
-                isSigninSuccess ? navigate('/mypage') : console.log("failed")})
+                isSigninSuccess ? navigate('/') : console.log("failed")})
             .catch((e)=>console.log(e))
             
         }
@@ -61,12 +59,12 @@ export default function Login() {
                         value={loginInfo.user_password}
                         onChange={handleInputValue("user_password")}/>
                 </Form.Group>
-            
-            <Button 
+                <Button 
                     id="loginBTN" size="lg" type="submit" disabled={!validateForm()}>
                     continue
-            </Button>
+                </Button>
             </Form>
+
         </div>
        </div> 
     )
