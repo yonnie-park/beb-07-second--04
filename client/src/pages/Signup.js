@@ -48,42 +48,42 @@ export default function Signup() {
             <Form onSubmit={handleSubmit}>
                 <div id="forms">
                     <h1>create account</h1>
-                    <Form.Group size="lg" controlId="username">
+                    <Form.Group size="lg">
                         <Form.Control
                             placeholder="아이디를 입력하세요"
-                            id="formbox"
+                            className="formbox"
                             autoFocus 
                             type="text"
                             value={userInfo.user_id} 
                             onChange={handleInputValue("user_id")} />
                     </Form.Group>
-                    <Form.Group size="lg" controlId="password">
+                    <Form.Group size="lg">
                         <Form.Control
                             placeholder="비밀번호를 입력하세요"
-                            id="formbox" 
+                            className="formbox" 
                             type="password"
                             value={userInfo.user_password}
                             onChange={handleInputValue("user_password")} />
                     </Form.Group>
-                    <Form.Group size="lg" controlId="password">
+                    <Form.Group size="lg">
                         <Form.Control
                             placeholder="비밀번호 확인"
-                            id="formbox" 
+                            className="formbox" 
                             type="password"
                             value={passwordCheck}
                             onChange={(e)=>setPasswordCheck(e.target.value)}/>
                     </Form.Group>
-                    <Form.Group size="lg" controlId="nickname">
+                    <Form.Group size="lg">
                         <Form.Control
                             placeholder="사용하실 닉네임을 입력하세요"
-                            id="formbox"
+                            className="formbox"
                             autoFocus 
                             type="text"
                             value={userInfo.user_nickname} 
                             onChange={handleInputValue("user_nickname")} />
                     </Form.Group>
                     <Button 
-                    id="loginBTN" size="lg" type="submit" disabled={!validateForm()}>
+                    id="signupBTN" size="lg" type="submit" disabled={!validateForm()}>
                         continue
                     </Button>
                 </div>

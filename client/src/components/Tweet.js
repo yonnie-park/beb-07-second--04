@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import dummyData from "../resources/dummyData"
+import {HeartOutlined, HeartFilled} from "@ant-design/icons"
 import "./Tweet.css"
 
 export default function Tweet() {
+  const [isChecked, setIsChecked] = useState(false)
+
+  function clickHeart(){
+    setIsChecked(true)
+  }
+
   return (
     <div className='tweet'>
       <div >
@@ -15,6 +22,9 @@ export default function Tweet() {
                 <div id="userid">{`@`+ e.user_id}</div>
               </div>
               <div id="content">{e.content}</div>
+              <div className='like'>
+                <button onClick={clickHeart} className="hvr-pulse" ><HeartFilled style={{color: "#e63946", fontSize: "20px"}}/></button>
+              </div>
             </div>
           )
         })}
