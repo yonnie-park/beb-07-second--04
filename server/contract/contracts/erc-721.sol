@@ -7,13 +7,14 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract SimpleNFT is ERC721URIStorage, Ownable {
+contract SnorLaxNFT is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    IERC20 token;
+    IERC20 public token;
     uint256 nftPrice;
+    mapping(string => uint256) public getToken;
 
-    constructor() ERC721("SimpleNFTs", "SNFT") {
+    constructor() ERC721("SnorLaxNFTs", "SNFT") {
         nftPrice = 100;
     }
 
@@ -29,6 +30,7 @@ contract SimpleNFT is ERC721URIStorage, Ownable {
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, tokenURI);
+        getToken[tokenURI] = newItemId;
 
         return newItemId;
     }
@@ -37,5 +39,13 @@ contract SimpleNFT is ERC721URIStorage, Ownable {
         require(tokenAddress != address(0x0));
         token = IERC20(tokenAddress);
         return true;
+    }
+
+    function checkTokenId(string memory tokenURI)
+        public
+        view
+        returns (uint256)
+    {
+        return getToken[tokenURI];
     }
 }
