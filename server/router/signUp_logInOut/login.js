@@ -39,6 +39,7 @@ router.post('/', async(req, res)=>{
 
         if(year == dbTime_year && month == dbTime_month && day == dbTime_day){
             // 10 토큰 전송
+            // 첫 로그인 마다 10토큰을 계정 지갑으로 전송
             return res.status(200).send({status:"success", message:"첫 로그인 10토큰 지급 완료"});
         }
         return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
