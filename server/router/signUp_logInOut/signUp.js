@@ -3,6 +3,8 @@ const router = express.Router();
 // const db = {user_id:"1", user_password:"2", user_nickname:"3"};
 // const user = require("../../DB/Entity/user"); // user DB
 const db = require("../../DB/db");
+const lightwallet = require("eth-lightwallet/");
+const fs = require('fs');
 
 
 
@@ -14,19 +16,26 @@ router.post('/',async (req,res)=>{
     //db에서 정보 검색해서
     // db.user_id, user_password, user_nickname 에 저장 or 검색해서 중복되는 결과가 있는지 확인
     
-    if (db.user_id && db.user_password && db.user_nickname) {
-        db.query('SELECT * FROM user WHERE user_id =? AND user_nickname =?', 
-        [user_id, user_nickname], function(err,results,fields){ // 중복 확인
-            if(err) throw err;
-            if(results.length <=0 && user_password) {
-                db.query('INSERT INTO user (user_id, user_password, user_nickname) VALUES(?,?,?'), 
-                [user_id,user_password,user_nickname], function(err,data){
-                    if(err) throw err;
-                    res.send("회원가입이 완료되었습니다")
-                } 
-            } 
-        })
-    }
+    // if (user_id && user_password && user_nickname) {
+    //     try{
+    //         db.query('SELECT * FROM user WHERE id =? AND user_name =?', 
+    //         [user_id, user_nickname], function(err,results,fields){ // 중복 확인
+    //             console.log(err, results);
+    //             if(err) throw err;
+    //             if(results.length <=0 && user_password) {
+    //                 console.log(results);
+    //                 db.query('INSERT INTO user (user_id, user_password, user_nickname) VALUES(?,?,?'), 
+    //                 [user_id,user_password,user_nickname], function(err,data){
+    //                     if(err) throw err;
+    //                     res.send("회원가입이 완료되었습니다")
+    //                 } 
+    //             } 
+    //         })
+    //     } catch(err){
+    //         console.log(err);
+    //     }
+        
+    // }
 
     if(db.user_id == user_id){
         res.status(406).send({status:"failed", message:"중복된 ID 입니다"})
@@ -39,12 +48,12 @@ router.post('/',async (req,res)=>{
         mnemonic = lightwallet.keystore.generateRandomSeed();
         lightwallet.keystore.createVault(
             {
-                password: password,
+                password: user_password,
                 seedPhrase : mnemonic,
                 hdPathString : "m/0'/0'/0'"
             },
             function(err,ks){
-                ks.keyFromPassword(password, function(err, pwDerivedKey){
+                ks.keyFromPassword(user_password, function(err, pwDerivedKey){
                     ks.generateNewAddress(pwDerivedKey, 1);
 
                     let address = (ks.getAddresses()).toString();

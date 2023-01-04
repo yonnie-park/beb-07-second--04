@@ -1,4 +1,7 @@
 const mysql = require('mysql');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const con = mysql.createConnection(
   {
@@ -10,8 +13,10 @@ const con = mysql.createConnection(
   }
 );
 
-con.connect(() => {
+con.connect((err) => {
+  if(err) throw err;
   console.log("db init success");
+  
 })
 
 
