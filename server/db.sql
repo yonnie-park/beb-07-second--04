@@ -15,7 +15,8 @@ CREATE TABLE user (
     `user_nickname` varchar(255) not NULL,
     `user_accountAddress` varchar(255),
     `user_profileImg` varchar(255),
-    `user_keystore` varchar(10000)
+    `user_keystore` varchar(10000),
+    `user_loginTime` varchar(255) 
 );
 
 CREATE TABLE post (
@@ -42,7 +43,7 @@ CREATE TABLE token (
     `sendToken_Address` varchar(255)
 );
 
-CREATE TABLE login (
-    `id` int PRIMARY KEY,
-    `login_isFirstTime` DATETIME not NULL
-);
+-- CREATE TABLE login (
+--     `id` int PRIMARY KEY,
+--     `user_loginTime` DATETIME not NULL
+-- );

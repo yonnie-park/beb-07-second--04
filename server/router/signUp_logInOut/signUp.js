@@ -22,7 +22,7 @@ router.post('/',async (req,res)=>{
         [user_id, user_nickname], function(err,results,fields){ // 중복 확인
         console.log(err, results);
         if(results.length > 0){
-            res.status(406).send({status:"failed", message:"id 또는 닉네임이 중복 입니다"})
+            res.status(406).send({status:"failed", message:"ID와 닉네임은 중복할 수 없습니다"})
         }
         else{
             let mnemonic;

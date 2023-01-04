@@ -3,7 +3,8 @@ require('date-utils');
 
 const router = express.Router();
 
-const db = {user_id:"1", user_password:"2", user_nickname:"3", user_loginTime:"2023-01-03"};
+// const db = {user_id:"1", user_password:"2", user_nickname:"3", user_loginTime:"2023-01-03"};
+const db = require("../../DB/db");
 
 router.post('/', async(req, res)=>{
     const {user_id, user_password} = req.body;
@@ -28,16 +29,19 @@ router.post('/', async(req, res)=>{
         req.session.user_nickname = db.user_nickname;
         req.session.save();
 
-        console.log(req.session);
-
         // db에 로그인 일자 업데이트 
+        db.query('INSERT INTO user (user_loginTime VALUES(?)',[user_loginTime], function(err, data){
+            if(err){
+                console.log(err);
+            }
+        })
 
 
         if(year == dbTime_year && month == dbTime_month && day == dbTime_day){
             // 10 토큰 전송
             return res.status(200).send({status:"success", message:"첫 로그인 10토큰 지급 완료"});
         }
-        return res.status(200).send({status:"success"})
+        return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
     }
     else{
         return res.status(400).send({status:"failed", message:"아이디, 비밀번호가 일치하지 않습니다."});
