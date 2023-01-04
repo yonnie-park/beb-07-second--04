@@ -23,25 +23,25 @@ CREATE TABLE post (
     `post_contents` varchar(255) not NULL,
     `post_ID` int not NULL,
     `post_userImg` varchar(255)
-)
+);
 
 CREATE TABLE likes (
     `id` int PRIMARY KEY,
     `like_count` int not NULL
-)
+);
 
 CREATE TABLE nft (
     `id` varchar(255) PRIMARY KEY,
     `metadata` varchar(255) not NULL,
     `nft_imgURL` varchar(255) not NULL,
-)
+);
 
 CREATE TABLE token (
     `id` varchar(255) PRIMARY KEY,
     `sendToken_Address` varchar(255)
-)
+);
 
 CREATE TABLE login (
     `id` int PRIMARY KEY,
     `login_isFirstTime` DATETIME not NULL
-)
+);
