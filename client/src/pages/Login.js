@@ -13,7 +13,7 @@ export default function Login() {
         user_id: "",
         user_password: ""
     })
-    //const [isSigninSuccess, setSigninSuccess] = useState(false) 이게왜안되지
+    const [isSigninSuccess, setSigninSuccess] = useState(false) //이게왜안되지
     
 
     const handleInputValue = (key) => (e) => {
@@ -27,7 +27,7 @@ export default function Login() {
     function handleSubmit(event){
         let isSigninSuccess = false
         event.preventDefault();
-        if(loginInfo.username && loginInfo.password){
+        if(loginInfo.user_id && loginInfo.user_password){
             axios.post("http://localhost:8080/login", loginInfo)
             .then((result) => {
                 console.log(result.data.status)
@@ -39,8 +39,6 @@ export default function Login() {
             
         }
     }
-
-
     return(
        <div className="container">
         <div id="forms">
@@ -63,11 +61,12 @@ export default function Login() {
                         value={loginInfo.user_password}
                         onChange={handleInputValue("user_password")}/>
                 </Form.Group>
-            </Form>
+            
             <Button 
                     id="loginBTN" size="lg" type="submit" disabled={!validateForm()}>
                     continue
             </Button>
+            </Form>
         </div>
        </div> 
     )
