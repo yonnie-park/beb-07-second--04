@@ -10,10 +10,10 @@
 
 
 CREATE TABLE user (
-    `id` varchar(255) PRIMARY KEY,
+    `user_id` varchar(255) PRIMARY KEY,
     `user_password` varchar(255) not NULL,
-    `user_name` varchar(255) not NULL,
-    `user_accountAddress` varchar(255) not NULL,
+    `user_nickname` varchar(255) not NULL,
+    `user_accountAddress` varchar(255),
     `user_profileImg` varchar(255)
 );
 
@@ -31,7 +31,7 @@ CREATE TABLE likes (
 );
 
 CREATE TABLE nft (
-    `id` varchar(255) PRIMARY KEY,
+    `user_nfts` varchar(255) PRIMARY KEY,
     `metadata` varchar(255) not NULL,
     `nft_imgURL` varchar(255) not NULL,
 );
