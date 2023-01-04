@@ -15,10 +15,10 @@ export default function Footer(){
             <a href="https://github.com/codestates-beb/beb-07-second--04"><img id="githublogo" src={github} alt="logo"/></a>
             <p>👇 check out our github 👇</p>
             <div>
-                <a href="https://github.com/2h-Song"><img id="emoji" src={fourth} alt="logo"/></a>
-                <a href="https://github.com/NotoriousHong"><img id="emoji" src={second} alt="logo"/></a>
-                <a href="https://github.com/yonnie-park"><img id="emoji" src={first} alt="logo"/></a>
-                <a href="https://github.com/Beomhyuck"><img id="emoji" src={third} alt="logo"/></a>
+                <a href="https://github.com/2h-Song"><img id="emoji" className="hvr-grow" src={fourth} alt="logo"/></a>
+                <a href="https://github.com/NotoriousHong"><img id="emoji" className="hvr-grow" src={second} alt="logo"/></a>
+                <a href="https://github.com/yonnie-park"><img id="emoji" className="hvr-grow" src={first} alt="logo"/></a>
+                <a href="https://github.com/Beomhyuck"><img id="emoji" className="hvr-grow" src={third} alt="logo"/></a>
             </div>
         </div>
     )
