@@ -1,9 +1,9 @@
 const express = require('express');
 require('date-utils');
-
+const db = require("../../DB/db");
 const router = express.Router();
 
-const db = {user_id:"1", user_password:"2", user_nickname:"3", user_loginTime:"2023-01-03"};
+// const db = {user_id:"1", user_password:"2", user_nickname:"3", user_loginTime:"2023-01-03"};
 
 router.post('/', async(req, res)=>{
     const {user_id, user_password} = req.body;
@@ -16,6 +16,11 @@ router.post('/', async(req, res)=>{
     const month = timeSplit[1];
     const day = timeSplit[2];
 
+    db.query('SELECT user_loginTime FROM user WHERE user_id =? OR user_nickname =?', 
+        [user_id, user_nickname], function(err,results,fields){
+
+        }
+    );
     const dbTime = db.user_loginTime.split('-');
     const dbTime_year = dbTime[0];
     const dbTime_month = dbTime[1];
