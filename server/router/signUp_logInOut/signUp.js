@@ -18,8 +18,8 @@ router.post('/',async (req,res)=>{
     
     if (user_id && user_password && user_nickname) {
         try{
-            db.query('SELECT * FROM user WHERE user_id =? AND user_nickname =?', 
-            [user_id, user_nickname], function(err,results,fields){ // 중복 확인
+            db.query('SELECT * FROM user WHERE user_id =? OR user_nickname =?', 
+            [user_id, user_nickname], function(err,results){ // 중복 확인
                 console.log(err, results);
                 if(err) throw err;
                 if(results.length <=0 && user_password) {
@@ -29,7 +29,9 @@ router.post('/',async (req,res)=>{
                         if(err) throw err;
                         res.send("회원가입이 완료되었습니다")
                     } 
-                )} 
+                )} else {
+                    res.status(200).send({data:results, message: "이미 사용중인 ID입니다"})
+                }
             })
         } catch(err){
             console.log(err);
@@ -41,7 +43,7 @@ router.post('/',async (req,res)=>{
          return res.status(406).send({status:"failed", message:"중복된 ID 입니다"})
     }
     else if(db.user_nickname == user_nickname){
-        res.status(406).send({status:"failed", message:"중복된 닉네임 입니다"})
+        return res.status(406).send({status:"failed", message:"중복된 닉네임 입니다"})
     }
     else{
         let mnemonic;              

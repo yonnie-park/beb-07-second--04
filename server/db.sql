@@ -14,7 +14,8 @@ CREATE TABLE user (
     `user_password` varchar(255) not NULL,
     `user_nickname` varchar(255) not NULL,
     `user_accountAddress` varchar(255),
-    `user_profileImg` varchar(255)
+    `user_profileImg` varchar(255),
+    `keystore` varchar(255)
 );
 
 CREATE TABLE post (
