@@ -10,8 +10,7 @@ export default function TweetList(){
             <Tweet/>
             <Tweet/>
             <Tweet/>
-            <Tweet/>
-            
+            <Tweet/>     
         </div>
     )
 }

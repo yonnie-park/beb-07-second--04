@@ -244,7 +244,12 @@ contract SnorLaxToken is ERC20Interface, OwnerHelper {
         _personalTokenLock[_who] = false;
     }
 
-    function assignTokenLock(address _who) public onlyOwner {
+    function assignTokenLock() public onlyOwner {
+        require(_tokenLock == false);
+        _tokenLock = true;
+    }
+
+    function assignPersonalTokenLock(address _who) public onlyOwner {
         require(_personalTokenLock[_who] == false);
         _personalTokenLock[_who] = true;
     }

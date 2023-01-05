@@ -11,7 +11,6 @@ router.get('/', async(req, res)=>{
         console.log(results);
         if (err) throw err;
         res.status(200).send({status:"success", posts_list:results});
-        
     })
 })
 
@@ -22,10 +21,10 @@ router.post('/upload',async (req,res)=>{
     console.log(req.session);
     const newDate = new Date();
     const post_createdAt = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');
-    console.log(time);
+    // console.log(time);
     const datas = [post_title,post_contents,req.session.user_nickname,post_createdAt];
 
-    const sql = "INSERT INTO post (post_title,post_contents,user_nickname,user_profileImg,post_createdAt) VALUES(?,?,?,?,now())";
+    const sql = "INSERT INTO post (post_title,post_contents,post_ID,post_createdAt, post_userImg, post_likes) VALUES(?,?,?,?,'img',0)";
     db.query(sql, datas, function(err,rows){
         if (err) {
             console.error(err);
