@@ -10,6 +10,7 @@ export default function SendToken() {
     return (
     <div className='SendToken'>
         <Form onSubmit={handleSubmit}>
+        <h2>Send Token</h2>
           <div>
           <Form.Group size="lg">
             <Form.Control
