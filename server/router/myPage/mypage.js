@@ -12,6 +12,6 @@ router.get('/', async(req, res)=>{
     // SQL문 user_id 기준에서 accountAddress nickname profileImg nfts 가져와야함
     // SQL문 post_id = user_id 같은 게시물 5개 
     // createdAt 시간 기준으로 likes title contents id(포스트넘버) 포함되어야함 
-    // post_userImg == user_profileImg 인 게시물 5개
+    // post_userImg == user_profileImg 게시물 5개
 });
 module.exports = router;
