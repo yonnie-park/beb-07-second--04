@@ -1,4 +1,5 @@
 const express = require('express');
+require('date-utils');
 const router = express.Router();
 const db = require('../../DB/db');
 
@@ -16,14 +17,25 @@ router.get('/', async(req, res)=>{
 
 // 업로드는 좋아요 X
 router.post('/upload',async (req,res)=>{
-    const {post_title,post_contents,user_nickname,post_createdAt,user_profileImg} = req.body;
-    console.log(post_title,post_contents,user_nickname,post_createdAt,user_profileImg);
-    const datas = [post_title,post_contents,user_nickname,post_createdAt,user_profileImg];
+    const {post_title,post_contents} = req.body;
+    console.log(req.body);
+    console.log(req.session);
+    const newDate = new Date();
+    const post_createdAt = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');
+    console.log(time);
+    const datas = [post_title,post_contents,req.session.user_nickname,post_createdAt];
 
-    const sql = "INSERT INTO POST(post_title,post_contents,user_nickname,user_profileImg,post_createdAt) VALUES(?,?,?,?,now())";
+    const sql = "INSERT INTO post (post_title,post_contents,user_nickname,user_profileImg,post_createdAt) VALUES(?,?,?,?,now())";
     db.query(sql, datas, function(err,rows){
-        if (err) console.error("Error:" + err);
-        res.redirect('/page/main')
+        if (err) {
+            console.error(err);
+            return res.status(400).send({status:"failed", message:"게시글 작성 실패 : + err"});
+        }
+
+        // 현재 가지고 있는 토큰 갯수 검사
+
+        //충분할 경우
+        else res.status(200).send({status:"success", message:"게시글 작성 완료"});
     })
 })
 module.exports = router;
