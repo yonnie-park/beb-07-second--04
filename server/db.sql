@@ -20,11 +20,13 @@ CREATE TABLE user (
 );
 
 CREATE TABLE post (
-    `id` int PRIMARY KEY,
+    `id` int PRIMARY KEY AUTO_INCREMENT,
+    `post_title` varchar(255) not NULL,
     `post_likes` int not NULL,
     `post_contents` varchar(255) not NULL,
-    `post_ID` int not NULL,
-    `post_userImg` varchar(255)
+    `post_ID` varchar(255) not NULL,
+    `post_userImg` varchar(255),
+    `post_createdAt` varchar(255)
 );
 
 CREATE TABLE likes (

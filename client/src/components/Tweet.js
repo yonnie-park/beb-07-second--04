@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import dummyData from "../resources/dummyData"
-import {HeartOutlined, HeartFilled} from "@ant-design/icons"
+import {HeartFilled} from "@ant-design/icons"
 import "./Tweet.css"
+import axios from "axios"
 
 export default function Tweet() {
   const [isChecked, setIsChecked] = useState(false)
