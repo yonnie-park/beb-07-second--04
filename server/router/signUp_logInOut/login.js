@@ -51,19 +51,6 @@ router.post('/', async(req, res)=>{
         }
     );
 
-    // console.log(year,month,day);
-
-    // if(user_id == db.user_id && user_password == db.user_password){
-    //     // db에 로그인 일자 업데이트 
-    //     if(year == dbTime_year && month == dbTime_month && day == dbTime_day){
-    //         // 10 토큰 전송
-    //         return res.status(200).send({status:"success", message:"첫 로그인 10토큰 지급 완료"});
-    //     }
-    //     return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
-    // }
-    // else{
-    //     return res.status(400).send({status:"failed", message:"아이디, 비밀번호가 일치하지 않습니다."});
-    // }
     
 });
 module.exports = router;
