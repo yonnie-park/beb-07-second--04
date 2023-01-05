@@ -1,20 +1,35 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import dummyData from "../resources/dummyData"
 import "./Write.css"
 
 export default function Write() {
-  const [tweet, setTweet] = useState('');
-  const handleChange = (event) => {
-    setTweet(event.target.value);
+  const [tweetInfo, setTweetInfo] = useState({
+    post_title: "",
+    post_contents: "",
+    user_nickname: "",
+    post_createdAt: ""
+  });
+  const handleChange = (key) => (event)=> {
+    setTweetInfo({...tweetInfo, [key]:event.target.value});
   }
 
   const handleSubmit = (event) => {
+    let isPostSuccess = false
     event.preventDefault();
-    // Add code to post tweet here
-    setTweet('');
+    if(tweetInfo.post_contents){
+      axios.post("http://localhost:8080/posts/upload", tweetInfo)
+      .then((result)=>{
+        console.log(result.data.status)
+        result.data.status==="succes"? isPostSuccess=true : isPostSuccess=false
+      })
+      .then(()=>{
+        isPostSuccess ? window.location.reload() : console.log()
+      })
+    }
   }
   function validateForm(){
-    return tweet.length>0
+    return tweetInfo.post_contents.length>0
 }
   return (
     <div className='write'>
@@ -31,7 +46,7 @@ export default function Write() {
       </div>
       <div id="tweetForm">
         <form onSubmit={handleSubmit} id="form">
-          <textarea placeholder="write something..." value={tweet} onChange={handleChange} id="tweetbox"/>
+          <textarea placeholder="write something..." value={tweetInfo.post_contents} onChange={handleChange} id="tweetbox"/>
           <button type="submit" id="tweetBTN" disabled={!validateForm()}>post</button>
         </form>
       </div>
