@@ -9,8 +9,7 @@ export default function Main() {
             <div id="write"><Write/></div>
             <div id="contentBox">
                 <TweetList/>
-            </div>
-            
+            </div> 
         </div>
     )
 }
