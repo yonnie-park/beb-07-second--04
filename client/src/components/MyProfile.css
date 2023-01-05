@@ -1,0 +1,27 @@
+.MyProfile{
+    width: 800px;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 30px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#MyProfilePic{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover; 
+}
+
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
