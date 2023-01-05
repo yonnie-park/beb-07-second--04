@@ -9,7 +9,7 @@ router.get('/', async(req, res)=>{
     console.log(post_likes,post_title,post_contents,post_createdAt,post_userImg,post_ID);
     
     const datas = [post_likes,post_title,post_contents,user_nickname,post_createdAt,post_userImg];
-    let sql = 'SELECT * FROM POST'
+    let sql = 'SELECT * FROM post'
     db.query(sql, datas, function(err,results,field){
         if (err) throw err;
         res.render('/', {data:results});
