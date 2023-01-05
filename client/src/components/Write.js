@@ -21,7 +21,7 @@ export default function Write() {
       axios.post("http://localhost:8080/posts/upload", tweetInfo)
       .then((result)=>{
         console.log(result.data.status)
-        result.data.status==="succes"? isPostSuccess=true : isPostSuccess=false
+        result.data.status==="success"? isPostSuccess=true : isPostSuccess=false
       })
       .then(()=>{
         isPostSuccess ? window.location.reload() : console.log()
@@ -46,7 +46,7 @@ export default function Write() {
       </div>
       <div id="tweetForm">
         <form onSubmit={handleSubmit} id="form">
-          <textarea placeholder="write something..." value={tweetInfo.post_contents} onChange={handleChange} id="tweetbox"/>
+          <textarea placeholder="write something..." value={tweetInfo.post_contents} onChange={handleChange("post_contents")} id="tweetbox"/>
           <button type="submit" id="tweetBTN" disabled={!validateForm()}>post</button>
         </form>
       </div>
