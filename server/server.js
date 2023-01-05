@@ -18,14 +18,14 @@ app.use(
     secret:'snorlax',
     resave: false,
     saveUninitialized: true,
-    cookie:{
-      domain: 'localhost',
-      path:'/',
-      maxAge: 24*6*60*10000,
-      sameSite: 'NONE',
-      httpOnly: false,
-      secure: false
-    }
+    // cookie:{
+    //   // domain: 'localhost',
+    //   path:'/',
+    //   maxAge: 24*6*60*10000,
+    //   sameSite: 'NONE',
+    //   httpOnly: false,
+    //   secure: true
+    // }
   })
 )
 

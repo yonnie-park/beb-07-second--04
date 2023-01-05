@@ -18,18 +18,19 @@ router.post('/', async(req, res)=>{
 
 
 
-    db.query('SELECT user_loginTime FROM user WHERE user_id =? OR user_password =?', 
+    db.query('SELECT user_loginTime, user_nickname FROM user WHERE user_id =? AND user_password =?', 
         [user_id, user_password], function(err,results,fields){
             if(err) return res.status(400).send({status:"failed", message:"DB에러가 발생했습니다."});
 
             if(results.length <= 0) return res.status(400).send({status:"failed", message:"아이디, 비밀번호가 일치하지 않습니다."});
 
-            req.session.user_id = db.user_id;
-            req.session.user_nickname = db.user_nickname;
-            req.session.save();
+            req.session.user_id = user_id;
+            req.session.user_nickname = results[0].user_nickname;
 
+            console.log(req.session);
+            console.log(results);
             let lastLoginTime = results[0].user_loginTime;
-            console.log(lastLoginTime);
+            // console.log(lastLoginTime);
             if(!lastLoginTime){
                 lastLoginTime = '0000-00-00';
             }
@@ -37,6 +38,7 @@ router.post('/', async(req, res)=>{
             console.log(dbTime);
             if (dbTime[0] != year && dbTime[1] != month && dbTime[2] != day){
                 //첫번쨰 로그인
+                // token 전송기능
                 db.query('UPDATE user SET user_loginTime=? WHERE user_id = ?',[time,user_id], function(err, data){
                     if(err){
                         console.log(err);
