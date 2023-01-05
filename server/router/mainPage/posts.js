@@ -9,7 +9,7 @@ router.get('/', async(req, res)=>{
     db.query(sql, function(err,results,field){
         console.log(results);
         if (err) throw err;
-        res.status(200).send({status:""});
+        res.status(200).send({status:"success", posts_list:results});
         
     })
 })

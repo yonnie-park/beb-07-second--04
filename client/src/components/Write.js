@@ -21,7 +21,7 @@ export default function Write() {
       axios.post("http://localhost:8080/posts/upload", tweetInfo)
       .then((result)=>{
         console.log(result.data.status)
-        result.data.status==="succes"? isPostSuccess=true : isPostSuccess=false
+        result.data.status==="success"? isPostSuccess=true : isPostSuccess=false
       })
       .then(()=>{
         isPostSuccess ? window.location.reload() : console.log()
