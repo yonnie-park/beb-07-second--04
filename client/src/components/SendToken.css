@@ -1,0 +1,42 @@
+.SendToken{
+    background-color: white;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.2);
+    width: 800px;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 30px;
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+#Tokenformbox{
+    width: 600px;
+    height: 30px;
+    border: 1px dotted lightgray;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+#sendBTN{
+    width: 100px;
+    margin-top: 20px;
+    border:none;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    background-color: #e63946;
+    position: relative;
+    left: 85%
+}
+#sendBTN:hover{
+    cursor: pointer;
+}
+
+#sendBTN:disabled{
+    opacity: 50%;
+}
