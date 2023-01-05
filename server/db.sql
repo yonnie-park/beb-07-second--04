@@ -25,7 +25,8 @@ CREATE TABLE post (
     `post_likes` int not NULL,
     `post_contents` varchar(255) not NULL,
     `post_ID` int not NULL,
-    `post_userImg` varchar(255)
+    `post_userImg` varchar(255),
+    `post_createdAt` varchar(255)
 );
 
 CREATE TABLE likes (
