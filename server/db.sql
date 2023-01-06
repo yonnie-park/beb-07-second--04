@@ -30,8 +30,8 @@ CREATE TABLE post (
 );
 
 CREATE TABLE likes (
-    `id` int PRIMARY KEY,
-    `like_count` int not NULL
+    `user_id` varchar(255),
+    `post_num` int
 );
 
 CREATE TABLE nft (
