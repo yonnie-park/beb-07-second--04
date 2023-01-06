@@ -16,9 +16,7 @@ function App() {
         <Route path ="/" element={<Main/>}/>
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/mint" element={<Mint/>}/>
-        <Route path="/view" element={<View/>}>
-          <Route path=":id"/>
-        </Route>
+        <Route path="/view" element={<View/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>

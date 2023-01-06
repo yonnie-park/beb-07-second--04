@@ -16,7 +16,6 @@ export default function MintNFT() {
             <Form.Control
               placeholder="NFT 제목을 입력하세요"
                         id="Tokenformbox"
-                        autoFocus 
                         type="title"/>
           </Form.Group>
           <h5>image address</h5>
@@ -24,7 +23,6 @@ export default function MintNFT() {
             <Form.Control
               placeholder="민팅할 이미지 주소를 입력하세요"
                         id="Tokenformbox"
-                        autoFocus 
                         type="address"/>
           </Form.Group>
           </div>

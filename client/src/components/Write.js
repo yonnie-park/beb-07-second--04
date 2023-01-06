@@ -45,7 +45,7 @@ export default function Write() {
         })}
       </div>
       <div id="tweetForm">
-        <form onSubmit={handleSubmit} id="form">
+        <form onSubmit={handleSubmit} id="form" autofocus>
           <textarea placeholder="write something..." value={tweetInfo.post_contents} onChange={handleChange("post_contents")} id="tweetbox"/>
           <button type="submit" id="tweetBTN" disabled={!validateForm()}>post</button>
         </form>

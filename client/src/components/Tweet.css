@@ -1,11 +1,27 @@
+#tweetComponent{
+  text-decoration: none;
+  color:black;
+}
+.tweetDetail{
+  background-color: white;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.1);
+    width: 800px;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 30px;
+    margin: 30px; 
+}
 .tweet{
     background-color: white;
-    box-shadow: 0 4px 6px 0 rgba(0,0,0,.2);
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.1);
     width: 800px;
     height: fit-content;
     padding: 30px;
     border-radius: 30px;
     margin: 30px;
+}
+.tweet:hover{
+  background-color: rgba(0,0,0,.1);
 }
 #profPic{
     height: 70px;
@@ -24,13 +40,19 @@
     font-weight: bold;
 }
 #content{
-    margin-top: 30px;
-    margin-bottom:30px;
+    margin:30px;
+    margin-left: 88px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
+#content_full{
+  margin:30px;
+  margin-left: 88px;
+}
 .hvr-pulse{
     border: none;
-    background-color: white;
+    margin-left: 90%;
 }
 
 /* Pulse */

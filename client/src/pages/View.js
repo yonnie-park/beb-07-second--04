@@ -1,9 +1,9 @@
 import { React, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import TweetDetail from "../components/TweetDetail"
 export default function View() {
     return(
         <div className="container">
-        viewPage
+            <TweetDetail/>
         </div>
     )
 }
