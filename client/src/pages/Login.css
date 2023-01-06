@@ -1,4 +1,6 @@
 #forms{
+    -webkit-animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     height: 500px;
     border-radius: 25px;
     padding: 30px;
@@ -7,9 +9,33 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    box-shadow: 0 4px 6px 0 rgba(0,0,0,.1);
-}
-
+    box-shadow:  9px 9px 18px #ededed,
+    -9px -9px 18px #ffffff;}
+    @-webkit-keyframes scale-in-center {
+        0% {
+          -webkit-transform: scale(0);
+                  transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          -webkit-transform: scale(1);
+                  transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes scale-in-center {
+        0% {
+          -webkit-transform: scale(0);
+                  transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          -webkit-transform: scale(1);
+                  transform: scale(1);
+          opacity: 1;
+        }
+      }
+      
 #formbox{
     width: 350px;
     height: 40px;

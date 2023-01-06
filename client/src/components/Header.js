@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Route, Link, Routes, useLocation } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "./Header.css"
 
 export default function Header(props){
@@ -10,7 +10,7 @@ export default function Header(props){
 
     return(
         <div className="header">
-                <Link to="/" onClick="location.reload();" className="mainlogo">SNORLAX</Link>
+            <Link to="/" onClick="location.reload();" className="mainlogo">SNORLAX</Link>
             <div className="menuBTN">
                 <Link to="/mypage" className="menu">my page</Link>
                 <Link to="/login"><button className="loginBTN">Login</button></Link>

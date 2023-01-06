@@ -4,7 +4,8 @@
 }
 .tweetDetail{
   background-color: white;
-    box-shadow: 0 4px 6px 0 rgba(0,0,0,.1);
+  box-shadow:  9px 9px 18px #ededed,
+             -9px -9px 18px #ffffff;
     width: 800px;
     height: fit-content;
     padding: 30px;
@@ -13,7 +14,8 @@
 }
 .tweet{
     background-color: white;
-    box-shadow: 0 4px 6px 0 rgba(0,0,0,.1);
+    box-shadow:  9px 9px 18px #ededed,
+             -9px -9px 18px #ffffff;
     width: 800px;
     height: fit-content;
     padding: 30px;
