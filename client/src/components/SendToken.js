@@ -16,14 +16,12 @@ export default function SendToken() {
             <Form.Control
               placeholder="송금할 계좌를 입력해주세요"
                         id="Tokenformbox"
-                        autoFocus 
                         type="address"/>
           </Form.Group>
           <Form.Group size="lg">
             <Form.Control
               placeholder="얼마나 보낼까요?"
                         id="Tokenformbox"
-                        autoFocus 
                         type="address"/>
           </Form.Group>
           </div>

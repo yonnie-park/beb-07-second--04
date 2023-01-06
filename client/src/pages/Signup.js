@@ -77,7 +77,6 @@ export default function Signup() {
                         <Form.Control
                             placeholder="사용하실 닉네임을 입력하세요"
                             className="formbox"
-                            autoFocus 
                             type="text"
                             value={userInfo.user_nickname} 
                             onChange={handleInputValue("user_nickname")} />
