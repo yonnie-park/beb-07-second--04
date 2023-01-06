@@ -21,7 +21,6 @@ CREATE TABLE user (
 
 CREATE TABLE post (
     `id` int PRIMARY KEY AUTO_INCREMENT,
-    `post_title` varchar(255) not NULL,
     `post_likes` int not NULL,
     `post_contents` varchar(255) not NULL,
     `post_ID` varchar(255) not NULL,
