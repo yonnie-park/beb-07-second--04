@@ -1,12 +1,11 @@
 .container{
     min-height: 100vh;
-    padding-top: 100px;
+    padding-top: 130px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
 #contentBox{
     margin: 30px;
     height:fit-content;

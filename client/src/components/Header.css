@@ -1,5 +1,8 @@
 .header{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -7,10 +10,20 @@
     top:0;
     width: 100vw;
     background-color: whitesmoke;
-    gap:200px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding:30px;
     z-index:3;
+}
+.logoDiv{
+    grid-area:1/1/2/3
+}
+.mypageDiv{
+    grid-area:1/7/2/8
+}
+.loginDiv{
+    grid-area:1/8/2/9
+}
+.signupDiv{
+    grid-area:1/9/2/10
 }
 .mainlogo{
     font-size: 30px;
@@ -18,8 +31,36 @@
     color: #e63946;
     font-weight: bold;
     letter-spacing: 3px;
-    margin-left: 50px
+    margin-left: 50px;
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+
 }
+@-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
 .menuItems{
     display: flex;
     align-content: center;
