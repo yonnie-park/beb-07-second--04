@@ -13,6 +13,7 @@ export default function TweetDetail() {
               <img id="profPic" src={e.imgUrl} alt="profile"/>
               <div id="name">{e.user_nickname}</div>
               <div id="userid">{`@`+ e.user_id}</div>
+              <div id="createdAt">{`2022.01.08`}</div>
             </div>
             <div id="content_full">{e.content}</div>
             <div className='like'>
