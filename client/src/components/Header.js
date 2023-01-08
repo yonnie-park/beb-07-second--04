@@ -5,6 +5,7 @@ import "./Header.css"
 export default function Header(props){
 
     const [account, setAccount]=useState("")
+    
     const [isConnected, setIsConnected]=useState(false)
 
 

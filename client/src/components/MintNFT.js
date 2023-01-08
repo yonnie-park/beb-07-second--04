@@ -8,19 +8,19 @@ import axios from 'axios';
 export default function MintNFT() {
   const [mintNFT, setMintNFT]=useState({
     nft_name: "",
-    nft_imageURL: ""
+    ipfs_img_url: ""
   })
   const handleInputValue=(key)=>(e)=>{
     setMintNFT({...mintNFT, [key]: e.target.value})
     console.log(mintNFT)
   }
   function validateForm(){
-    return mintNFT.nft_name.length>0 && mintNFT.nft_imageURL.length>0
+    return mintNFT.nft_name.length>0 && mintNFT.ipfs_img_url.length>0
   }   
   function handleSubmit(event){
     let isMintSuccess=false
     event.preventDefault()
-    if(mintNFT.nft_imageURL && mintNFT.nft_name){
+    if(mintNFT.ipfs_img_url && mintNFT.nft_name){
       axios.post("http://localhost:8080/makeNFT", mintNFT)
       .then((res)=>{
         console.log(res.data.status)
@@ -50,8 +50,8 @@ export default function MintNFT() {
             <Form.Control
               placeholder="민팅할 이미지 주소를 입력하세요"
                         id="Tokenformbox"
-                        value={mintNFT.nft_imageURL}
-                        onChange={handleInputValue("nft_imageURL")}
+                        value={mintNFT.ipfs_img_url}
+                        onChange={handleInputValue("ipfs_img_url")}
                         type="address"/>
           </Form.Group>
           </div>
