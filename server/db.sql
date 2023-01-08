@@ -21,7 +21,6 @@ CREATE TABLE user (
 
 CREATE TABLE post (
     `id` int PRIMARY KEY AUTO_INCREMENT,
-    `post_title` varchar(255) not NULL,
     `post_likes` int not NULL,
     `post_contents` varchar(255) not NULL,
     `post_ID` varchar(255) not NULL,
@@ -30,8 +29,8 @@ CREATE TABLE post (
 );
 
 CREATE TABLE likes (
-    `id` int PRIMARY KEY,
-    `like_count` int not NULL
+    `user_id` varchar(255),
+    `post_num` int
 );
 
 CREATE TABLE nft (

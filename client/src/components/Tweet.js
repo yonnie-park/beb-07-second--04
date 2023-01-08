@@ -23,8 +23,10 @@ export default function Tweet() {
               <img id="profPic" src={e.imgUrl} alt="profile"/>
               <div id="name">{e.user_nickname}</div>
               <div id="userid">{`@`+ e.user_id}</div>
+              <div id="createdAt">{`2022.01.08`}</div>
             </div>
             <div id="content">{e.content}</div>
+            
             <div className='like'>
               <button onClick={clickHeart} className="hvr-pulse" ><HeartFilled style={{color: "#e63946", fontSize: "20px"}}/></button>
             </div>
