@@ -2,6 +2,9 @@
   text-decoration: none;
   color:black;
 }
+#createdAt{
+  color: lightgray;
+}
 .tweetDetail{
   background-color: white;
   box-shadow: 0 4px 6px 0 rgba(0,0,0,.1);
