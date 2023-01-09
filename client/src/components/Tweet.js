@@ -12,6 +12,7 @@ export default function Tweet() {
     setIsChecked(true)
   }
 
+
   return (
     <Link to="/view" id='tweetComponent'>
     <div className='tweet'>

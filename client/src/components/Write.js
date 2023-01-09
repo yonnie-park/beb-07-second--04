@@ -5,11 +5,14 @@ import "./Write.css"
 
 export default function Write() {
   const [tweetInfo, setTweetInfo] = useState({
-    post_title: "",
-    post_contents: "",
-    user_nickname: "",
-    post_createdAt: ""
+    post_userImg: "", // 게시글 작성자 이미지
+    post_ID:"", // 작성자 ID
+    post_likes:"",
+    post_contents:"", // 내용
+    ID:"", // 게시물 번호 
+    post_createdAt:"" // 게시물 작성시간
   });
+
   const handleChange = (key) => (event)=> {
     setTweetInfo({...tweetInfo, [key]:event.target.value});
   }
