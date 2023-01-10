@@ -10,13 +10,20 @@ import Login from "./pages/Login"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 
-import UseContext from "./UseContext"
+import {UserContext} from "./UserContext"
+
+
 function App() {
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState({
+    user_id:"",
+    user_password: "",
+    user_IMG: "",
+    user_account: ""
+  });
   
   return (
     <BrowserRouter>
-      <UseContext.Provider value={account}>
+      <UserContext.Provider value={{account, setAccount}}>
         <Header/>
         <Routes>
           <Route path ="/" element={<Main/>}/>
@@ -27,7 +34,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
         </Routes>
         <Footer/>
-      </UseContext.Provider>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
