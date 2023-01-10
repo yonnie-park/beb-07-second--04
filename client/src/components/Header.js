@@ -11,6 +11,7 @@ export default function Header(){
     function handleLogout(){
         axios.get("http://localhost:8080/logout")
         .then(setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: false}))
+        // then 부분이 문제였음...
     }
     return(
         <div className="header">

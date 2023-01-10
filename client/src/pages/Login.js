@@ -28,10 +28,14 @@ export default function Login() {
             axios.post("http://localhost:8080/login", account)
             .then((result) => {
                 console.log(result.data.status)
-                if(result.data.status==="success") setAccount({user_id: account.user_id, user_password: account.user_password, isConnected:true })
+                if(result.data.status==="success") {
+                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
+                    console.log(account);
             })
             .then(() => {
-                account.isConnected ? navigate('/') : console.log("failed")})
+                if(account.isConnected === "true"){
+                    console.log(account.isConnected);
+                }})
             .catch((e)=>console.log(e))
             
         }
