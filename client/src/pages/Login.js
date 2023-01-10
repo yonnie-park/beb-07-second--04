@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import {Link} from "react-router-dom"
@@ -6,33 +6,36 @@ import axios from "axios"
 import {useNavigate} from "react-router-dom"
 import "./Login.css"
 import "./style.css"
+import {UserContext} from "../UserContext"
+
 axios.defaults.withCredentials = true;
 
 export default function Login() {
-    const [loginInfo, setLoginInfo] = useState({
-        user_id: "",
-        user_password: ""
-    })   
+    const {account, setAccount} = useContext(UserContext)
 
     const handleInputValue = (key) => (e) => {
-        setLoginInfo({...loginInfo, [key]: e.target.value})
+        setAccount({...account, [key]: e.target.value})
     }
     function validateForm(){
-        return loginInfo.user_id.length>0 && loginInfo.user_password.length>0
+        return account.user_id.length>0 && account.user_password.length>0
     }
     const navigate = useNavigate()
 
     function handleSubmit(event){
-        let isSigninSuccess = false
+    
         event.preventDefault();
-        if(loginInfo.user_id && loginInfo.user_password){
-            axios.post("http://localhost:8080/login", loginInfo)
+        if(account.user_id && account.user_password){
+            axios.post("http://localhost:8080/login", account)
             .then((result) => {
                 console.log(result.data.status)
-                result.data.status==="success" ? isSigninSuccess=true : isSigninSuccess=false
+                if(result.data.status==="success") {
+                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
+                    console.log(account);
             })
             .then(() => {
-                isSigninSuccess ? navigate('/') : console.log("failed")})
+                if(account.isConnected === "true"){
+                    console.log(account.isConnected);
+                }})
             .catch((e)=>console.log(e))
             
         }
@@ -48,7 +51,7 @@ export default function Login() {
                         id="formbox"
                         autoFocus 
                         type="username"
-                        value={loginInfo.user_id} 
+                        value={account.user_id} 
                         onChange={handleInputValue("user_id")}/>
                 </Form.Group>
                 <Form.Group size="lg">
@@ -56,13 +59,15 @@ export default function Login() {
                         placeholder="비밀번호를 입력해주세요"
                         id="formbox" 
                         type="password"
-                        value={loginInfo.user_password}
+                        value={account.user_password}
                         onChange={handleInputValue("user_password")}/>
                 </Form.Group>
-                <Button 
+                <Link to="/">
+                    <Button 
                     id="loginBTN" size="lg" type="submit" disabled={!validateForm()}>
                     continue
-                </Button>
+                    </Button>
+                </Link>
             </Form>
 
         </div>

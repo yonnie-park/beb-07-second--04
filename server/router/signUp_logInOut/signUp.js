@@ -9,6 +9,7 @@ const { resourceLimits } = require('worker_threads');
 
 
 
+
 router.post('/',async (req,res)=>{
     const {user_id,user_password,user_nickname} = req.body;
     console.log(user_id,user_password,user_nickname);
@@ -26,6 +27,8 @@ router.post('/',async (req,res)=>{
         }
         else{
             let mnemonic;
+            let address;
+            let keystore;
             mnemonic = lightwallet.keystore.generateRandomSeed();
             lightwallet.keystore.createVault(
                 {
@@ -37,8 +40,8 @@ router.post('/',async (req,res)=>{
                     ks.keyFromPassword(user_password, function(err, pwDerivedKey){
                         ks.generateNewAddress(pwDerivedKey, 1);
     
-                        let address = (ks.getAddresses()).toString();
-                        let keystore = ks.serialize();
+                        address = (ks.getAddresses()).toString();
+                        keystore = ks.serialize();
                         
                         db.query('INSERT INTO user (user_id, user_password, user_nickname,user_accountAddress,user_keystore) VALUES(?,?,?,?,?)', 
                             [user_id,user_password,user_nickname,address,keystore], function(err,data){
@@ -52,6 +55,8 @@ router.post('/',async (req,res)=>{
                     })
                 }
             );
+            
+
         }
     })
 })

@@ -44,7 +44,3 @@ CREATE TABLE token (
     `sendToken_Address` varchar(255)
 );
 
--- CREATE TABLE login (
---     `id` int PRIMARY KEY,
---     `user_loginTime` DATETIME not NULL
--- );
