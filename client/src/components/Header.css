@@ -23,7 +23,9 @@
     grid-area:1/8/2/9
 }
 .signupDiv{
-    grid-area:1/9/2/10
+    grid-area:1/9/2/10;
+    display: flex;
+    flex-direction: row;
 }
 .mainlogo{
     font-size: 30px;
