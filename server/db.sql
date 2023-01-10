@@ -41,6 +41,6 @@ CREATE TABLE nft (
 
 CREATE TABLE token (
     `id` varchar(255) PRIMARY KEY,
-    `sendToken_Address` varchar(255)
+    `sendToken_Address` varchar(255),
 );
 
