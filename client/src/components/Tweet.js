@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dummyData from "../resources/dummyData"
 import {HeartFilled} from "@ant-design/icons"
 import "./Tweet.css"
@@ -7,12 +7,28 @@ import {Link} from "react-router-dom";
 
 export default function Tweet() {
   const [isChecked, setIsChecked] = useState(false)
+  
+  const [postInfo, setPostInfo] = useState({
+    post_contents: "", // 게시물 내용
+    post_createdAt: "", // 게시물 시간
+    post_ID: "", // 게시글 작성자 ID
+    post_userImg: "", // 게시글 작성자 프로필 이미지
+    post_likes: "" // 게시글 좋아요 
+  })
 
   function clickHeart(){
     setIsChecked(true)
   }
 
+  useEffect(()=> {
+    axios.get("http://localhost:8080/posts", postInfo)
+    .then((result)=>{
+      setPostInfo(result.data);
+    })
+    .catch((err)=>console.log(err))
+  }, []);
 
+  
   return (
     <Link to="/view" id='tweetComponent'>
     <div className='tweet'>
