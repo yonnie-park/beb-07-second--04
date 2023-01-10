@@ -10,21 +10,31 @@ import Login from "./pages/Login"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 
-function App() {
-  const [account, setAccount] = useState("");
+import {UserContext} from "./UserContext"
 
+
+function App() {
+  const [account, setAccount] = useState({
+    user_id:"",
+    user_password: "",
+    user_IMG: "",
+    user_account: ""
+  });
+  
   return (
     <BrowserRouter>
-      <Header/>
-      <Routes>
-        <Route path ="/" element={<Main/>}/>
-        <Route path="/mypage/:account" element={<Mypage account={account}/>}/>
-        <Route path="/mint" element={<Mint/>}/>
-        <Route path="/view" element={<View/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/login" element={<Login/>}/>
-      </Routes>
-      <Footer/>
+      <UserContext.Provider value={{account, setAccount}}>
+        <Header/>
+        <Routes>
+          <Route path ="/" element={<Main/>}/>
+          <Route path="/mypage/:account" element={<Mypage account={account}/>}/>
+          <Route path="/mint" element={<Mint/>}/>
+          <Route path="/view" element={<View/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+        <Footer/>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
