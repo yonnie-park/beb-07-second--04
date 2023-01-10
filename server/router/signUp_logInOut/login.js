@@ -24,7 +24,7 @@ router.post('/', async(req, res)=>{
     const timeSplit = time.split('-');
     const year = timeSplit[0];
     const month = timeSplit[1];
-    const day = timeSplit[2]+1;
+    const day = timeSplit[2];
 
     db.query('SELECT * FROM user WHERE user_id = \'server\'', function(err,results){
         const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
