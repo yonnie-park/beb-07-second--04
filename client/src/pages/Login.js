@@ -22,13 +22,14 @@ export default function Login() {
     const navigate = useNavigate()
 
     function handleSubmit(event){
+        
         let isSigninSuccess = false
         event.preventDefault();
         if(account.user_id && account.user_password){
             axios.post("http://localhost:8080/login", account)
             .then((result) => {
                 console.log(result.data.status)
-                result.data.status==="success" ? isSigninSuccess=true : isSigninSuccess=false
+                result.data.status==="success" ? setAccount({user_id: account.user_id, user_password: account.user_password, isConnected:true }) : isSigninSuccess=false
             })
             .then(() => {
                 isSigninSuccess ? navigate('/') : console.log("failed")})
