@@ -3,6 +3,7 @@ import "./style.css"
 import "./Main.css"
 import Write from "../components/Write"
 import TweetList from "../components/TweetList"
+
 export default function Main() {
     return(
         <div className="container">
