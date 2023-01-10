@@ -45,6 +45,9 @@ router.post('/',async (req,res)=>{
                 const ethBalance = await web3.eth.getBalance(server_address);
                 if(ethBalance < gasPrice) 
                 return res.status(200).send({status:"fail", message: 'Not enough GAS'});
+
+                // tokenBalance < amount 이면 Not enough Token 
+                // 핵심은 user <> user 가 아닌  server > user 일방적 tokenTransfer
             }
         })
     })
