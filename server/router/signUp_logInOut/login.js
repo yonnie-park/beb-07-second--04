@@ -5,9 +5,12 @@ const router = express.Router();
 const lightwallet = require("eth-lightwallet/");
 const Web3 = require('web3');
 
+require('dotenv').config();
+const { API_URL } = process.env;
+
 const { erc20_ABI } = require('../../contract/web3js/ABI');
 
-const web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/0554b32c0e7245e1b1a36bd726defb9d')); //ganache provider
+const web3 = new Web3(new Web3.providers.HttpProvider(API_URL)); //ganache provider
 
 const erc20ContractAddr = '0xe9FA229F8737f43BaBF747fBf76D821fB7Cb9a1A'; //ganache erc20 CA
 const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
@@ -21,7 +24,7 @@ router.post('/', async(req, res)=>{
     const timeSplit = time.split('-');
     const year = timeSplit[0];
     const month = timeSplit[1];
-    const day = 11;
+    const day = timeSplit[2]+1;
 
     db.query('SELECT * FROM user WHERE user_id = \'server\'', function(err,results){
         const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
@@ -35,7 +38,7 @@ router.post('/', async(req, res)=>{
             const key = keystore.exportPrivateKey(server_address.toString(), data);
 
             server_privateKey = '0x' + key;
-            console.log(server_privateKey);
+            // console.log(server_privateKey);
             db.query('SELECT * FROM user WHERE user_id =? AND user_password =?', 
             [user_id, user_password], function(err,results,fields){
                 if(err) return res.status(400).send({status:"failed", message:"DB에러가 발생했습니다."});
@@ -54,9 +57,9 @@ router.post('/', async(req, res)=>{
                 const recieveAccount = results[0].user_accountAddress;
                 
                 erc20Contract.methods.balanceOf(server_address).call().then(console.log)
-                console.log(dbTime, lastLoginTime, year,month,day);
+                // console.log(dbTime, lastLoginTime, year,month,day);
                 if (dbTime[0] != year || dbTime[1] != month || dbTime[2] != day){
-                    
+                    // console.log(dbTime, lastLoginTime, year,month,day);
                     db.query('UPDATE user SET user_loginTime=? WHERE user_id = ?',[time,user_id], function(err, data){
                         if(err){
                             console.log(err);
@@ -78,25 +81,67 @@ router.post('/', async(req, res)=>{
 
     async function transfer_erc20(server_address, server_privateKey,recieveAccount) {
         const gasPrice = await web3.eth.getGasPrice();
+        // console.log(gasPrice);
+        
+        // var txObj = {
+        //     nonce: web3.eth.getTransactionCount(server_address),
+        //     gasPrice: web3.eth.gasPrice,
+        //     gasLimit: 1000000,
+        //     to: erc20ContractAddr,
+        //     from: server_address,
+        //     value: '',
+        //     data: erc20Contract.methods.approve(recieveAccount, '20').encodeABI(),
+        // };
+        
+          
+        // let signedTx = await web3.eth.accounts.signTransaction(
+        //     txObj,
+        //     server_privateKey,
+        // );
+        // const approveResult = await web3.eth.sendSignedTransaction(
+        //     signedTx.rawTransaction,
+        // );
+
+        var txObj = {
+            nonce: web3.eth.getTransactionCount(server_address),
+            gasPrice: gasPrice,
+            gasLimit: 1000000,
+            to: recieveAccount,
+            from: server_address,
+            value: '0x71AFD498D0000', //0.002
+        };
+
+        let signedTx = await web3.eth.accounts.signTransaction(
+            txObj,
+            server_privateKey,
+        );
+        // console.log(txObj);
+        let transferResult = await web3.eth.sendSignedTransaction(
+            signedTx.rawTransaction,
+        );
+        // console.log(1, transferResult);
+
+        erc20Contract.methods.balanceOf(server_address).call().then(console.log)
+
         var txObj = {
             nonce: web3.eth.getTransactionCount(server_address),
             gasPrice: gasPrice,
             gasLimit: 1000000,
             to: erc20ContractAddr,
             from: server_address,
-            value: '',
+            value: '', //0.0002
             data: erc20Contract.methods.transfer(recieveAccount, '10').encodeABI(),
         };
 
-        const signedTx = await web3.eth.accounts.signTransaction(
+        signedTx = await web3.eth.accounts.signTransaction(
             txObj,
             server_privateKey,
         );
-        console.log(txObj);
-        const transferResult = await web3.eth.sendSignedTransaction(
+        // console.log(txObj);
+        transferResult = await web3.eth.sendSignedTransaction(
             signedTx.rawTransaction,
         );
-        console.log(1, transferResult);
+        // console.log(1, transferResult);
 
         erc20Contract.methods.balanceOf(server_address).call().then(console.log)
     }
