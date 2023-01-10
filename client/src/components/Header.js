@@ -17,8 +17,8 @@ export default function Header(){
         <div className="header">
                 <div className="logoDiv"><Link to="/" onClick="location.reload();" className="mainlogo">SNORLAX</Link></div>
                 <div className="mypageDiv"><Link to="/mypage/:account" className="menu" account={account.user_id}>my page</Link></div>
-                <div className="loginDiv"> {account.isConnected? <Link to="/"><button className="loginBTN" onClick={handleLogout()}>Logout</button></Link> : <Link to="/login"><button className="loginBTN">Login</button></Link>}</div>
-                {account.isConnected? console.log("connected"):<div className="signupDiv"><Link to="/signup"><button className="joinBTN">Sign up</button></Link></div>}
+                {account.isConnected? <Link to="/"><button className="loginBTN" onClick={handleLogout()}>Logout</button></Link>:console.log("disconnected")}
+                {account.isConnected? console.log("connected"):<div className="signupDiv"><Link to="/signup"><button className="joinBTN">Sign up</button></Link><Link to="/login"><button className="loginBTN">Login</button></Link></div>}
         </div>
     )
 }
