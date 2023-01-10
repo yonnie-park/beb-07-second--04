@@ -62,10 +62,12 @@ export default function Login() {
                         value={account.user_password}
                         onChange={handleInputValue("user_password")}/>
                 </Form.Group>
-                <Button 
+                <Link to="/">
+                    <Button 
                     id="loginBTN" size="lg" type="submit" disabled={!validateForm()}>
                     continue
-                </Button>
+                    </Button>
+                </Link>
             </Form>
 
         </div>
