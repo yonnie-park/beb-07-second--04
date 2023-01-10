@@ -17,8 +17,7 @@ function App() {
   const [account, setAccount] = useState({
     user_id:"",
     user_password: "",
-    user_IMG: "",
-    user_account: ""
+    isConnected: false
   });
   
   return (
