@@ -10,6 +10,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider(API_URL)); //ganache provi
 const erc20ContractAddr = '0xe9FA229F8737f43BaBF747fBf76D821fB7Cb9a1A'; //ganache erc20 CA
 const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
 
+
 const transfer_erc20 = async function (address, privateKey,recieveAccount, amount) {
     const gasPrice = await web3.eth.getGasPrice();
     // console.log(gasPrice);
