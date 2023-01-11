@@ -36,7 +36,7 @@ export default function Signup() {
                 result.data.status==="success"? isSigninSuccess=true : isSigninSuccess=false
             })
             .then(()=>{
-                isSigninSuccess? navigate('/') : console.log("failed")
+                isSigninSuccess? navigate('/') : alert("failed")
             }).catch((e)=>console.log(e))
         }
     }

@@ -31,11 +31,11 @@ export default function Login() {
                 if(result.data.status==="success") {
                     setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
                     console.log(account);
+                    navigate("/")
             })
             .then(() => {
                 if(account.isConnected === "true"){
                     console.log(account.isConnected)
-                    navigate("/");
                 }})
             .catch((e)=>console.log(e))
             
