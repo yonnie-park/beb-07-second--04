@@ -19,18 +19,18 @@ function App() {
     user_password: "",
     isConnected: false
   });
-  
+
   return (
     <BrowserRouter>
       <UserContext.Provider value={{account, setAccount}}>
         <Header/>
         <Routes>
-          <Route path ="/" element={<Main/>}/>
+          <Route path ="/" element={<Main />}/>
           <Route path="/mypage/:account" element={<Mypage account={account}/>}/>
-          <Route path="/mint" element={<Mint/>}/>
+          <Route path="/mint" element={<Mint />}/>
           <Route path="/view" element={<View/>}/>
           <Route path="/signup" element={<Signup/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/login" element={<Login />}/>
         </Routes>
         <Footer/>
       </UserContext.Provider>
