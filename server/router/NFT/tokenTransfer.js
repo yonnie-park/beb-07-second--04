@@ -15,7 +15,7 @@ const erc20ContractAddr = '0xe9FA229F8737f43BaBF747fBf76D821fB7Cb9a1A'; //ganach
 const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
 
 router.post('/',async (req,res)=>{
-    const {sendToken_Address, id} = req.body; 
+    const {sendToken_Address, id} = req.body;
     
     // user_accountAddress를 위한 query
     // 서버계정과 User계정과 transfer 진행
