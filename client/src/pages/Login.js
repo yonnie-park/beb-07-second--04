@@ -34,7 +34,8 @@ export default function Login() {
             })
             .then(() => {
                 if(account.isConnected === "true"){
-                    console.log(account.isConnected);
+                    console.log(account.isConnected)
+                    navigate("/");
                 }})
             .catch((e)=>console.log(e))
             
@@ -62,12 +63,10 @@ export default function Login() {
                         value={account.user_password}
                         onChange={handleInputValue("user_password")}/>
                 </Form.Group>
-                <Link to="/">
                     <Button 
                     id="loginBTN" size="lg" type="submit" disabled={!validateForm()}>
                     continue
                     </Button>
-                </Link>
             </Form>
 
         </div>
