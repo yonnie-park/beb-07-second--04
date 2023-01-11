@@ -39,13 +39,13 @@ router.post('/upload', async (req,res)=>{
     // console.log(time);
     const datas = [post_contents,req.session.user_nickname,post_createdAt];
     db.query('SELECT * FROM user WHERE user_id =? ',req.session.user_id, function(err,results,fields){
-        // console.log(results);
+        console.log(results);
         const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
         // console.log(keystore);
         const address = keystore.getAddresses()[0];
         // console.log(server_address);
         let privateKey;
-        console.log(address);
+        // console.log(address);
         keystore.keyFromPassword(results[0].user_password, (err, data) => {
 
             const key = keystore.exportPrivateKey(address.toString(), data);
@@ -53,7 +53,7 @@ router.post('/upload', async (req,res)=>{
             privateKey = '0x' + key;
             console.log(privateKey);
             
-            erc20Contract.methods.balanceOf(address).call().then(console.log);
+            // erc20Contract.methods.balanceOf(address).call().then(console.log);
             erc20Contract.methods.balanceOf(address).call().then(e=>{
                 if(e >= 1) {
                     const sql = "INSERT INTO post (post_contents,post_ID,post_createdAt, post_userImg, post_likes) VALUES(?,?,?,'img',0)";
@@ -66,7 +66,7 @@ router.post('/upload', async (req,res)=>{
                             
                             res.status(200).send({status:"success", message:"게시글 작성 완료"});
                             db.query('SELECT * FROM user WHERE user_id = \'server\'',function(err,results){
-                                console.log(address, results[0].user_accountAddress);
+                                // console.log(address, results[0].user_accountAddress);
                                 return transfer_erc20(address, privateKey, results[0].user_accountAddress,1);
                             })
                             
@@ -89,10 +89,11 @@ router.post('/likes',(req,res)=>{
     db.query(sql,post_num,function(err,results){
         // console.log(results);
         if(err) console.log(err);
+        const user_nickname = results[0].post_ID;
         const likes = results[0].post_likes + 1;
         db.query('SELECT * from likes WHERE user_id=? AND post_num=?',[user_id,post_num],function(err,results){
             if(err) console.log(err);
-            if(results.length > 0) return res.status(400).send({status:"failed", post_likes:likes-1, message:"이미 누른 좋아요 입니다."});
+            // if(results.length > 0) return res.status(400).send({status:"failed", post_likes:likes-1, message:"이미 누른 좋아요 입니다."});
             else{
                 db.query('INSERT INTO likes(user_id, post_num) VALUES (?,?)',[user_id,post_num],function(err,results){
                     if(err) {
@@ -101,7 +102,33 @@ router.post('/likes',(req,res)=>{
                     else{
                         db.query('UPDATE post SET post_likes=? WHERE id=?',[likes,post_num], function(err,results){
                             if(err) console.log(err);
-                            return res.status(200).send({status:"success", post_likes:likes})
+                            if(likes % 10 == 0){
+                                res.status(200).send({status:"success", post_likes:likes})
+                                db.query('SELECT * FROM user WHERE user_id=\'server\'',function(err,results){
+                                    console.log(results);
+                                    const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
+                                    console.log(keystore);
+                                    const address = keystore.getAddresses()[0];
+                                    // console.log(server_address);
+                                    let privateKey;
+                                    console.log(address);
+                                    keystore.keyFromPassword(results[0].user_password, (err, data) => {
+
+                                        const key = keystore.exportPrivateKey(address.toString(), data);
+
+                                        privateKey = '0x' + key;
+                                        console.log(privateKey);
+                                        db.query('SELECT * FROM user WHERE user_id = ?',user_id,function(err,results){
+                                            console.log(results[0]);
+                                            return transfer_erc20(address, privateKey, results[0].user_accountAddress,1);
+                                        })
+                                    });
+                                })
+                                
+                            }
+                            else{
+                                return res.status(200).send({status:"success", post_likes:likes})
+                            }
                         })
                     }
                 });
