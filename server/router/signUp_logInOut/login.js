@@ -5,7 +5,7 @@ const router = express.Router();
 const lightwallet = require("eth-lightwallet/");
 const Web3 = require('web3');
 
-let Testmode = 1;
+let Testmode = 0;
 
 require('dotenv').config();
 const { API_URL } = process.env;
