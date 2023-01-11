@@ -14,17 +14,18 @@ contract SnorLaxNFT is ERC721URIStorage, Ownable {
     uint256 nftPrice;
     mapping(string => uint256) public getToken;
 
-    constructor() ERC721("SnorLaxNFTs", "SNFT") {
-        nftPrice = 100;
+    constructor() ERC721("SnorLaxNFT", "SNFT") {
+        nftPrice = 50;
     }
 
-    function mintNFT(address recipient, string memory tokenURI)
-        public
-        returns (uint256)
-    {
+    function mintNFT(
+        address recipient,
+        address tokenRecipient,
+        string memory tokenURI
+    ) public returns (uint256) {
         require(token.balanceOf(recipient) > nftPrice);
 
-        token.transferFrom(recipient, msg.sender, nftPrice);
+        token.transferFrom(recipient, tokenRecipient, nftPrice);
 
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
