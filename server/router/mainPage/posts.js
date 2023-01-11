@@ -3,19 +3,34 @@ require('date-utils');
 const router = express.Router();
 const db = require('../../DB/db');
 
+const lightwallet = require("eth-lightwallet/");
+const Web3 = require('web3');
+
+const transfer_erc20 = require('../contract');
+
+require('dotenv').config();
+const { API_URL } = process.env;
+
+const { erc20_ABI } = require('../../contract/web3js/ABI');
+
+const web3 = new Web3(new Web3.providers.HttpProvider(API_URL)); //ganache provider
+
+const erc20ContractAddr = '0xe9FA229F8737f43BaBF747fBf76D821fB7Cb9a1A'; //ganache erc20 CA
+const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
+
 
 // 메인 게시판에는 사용자 사진,좋아요 전부 필요
 router.get('/', (req, res)=>{
     let sql = 'SELECT * FROM post ORDER BY post_createdAt DESC LIMIT 10';
     db.query(sql, function(err,results,field){
-        console.log(results);
+        // console.log(results);
         if (err) throw err;
         res.status(200).send({status:"success", posts_list:results});
     })
 })
 
 // 업로드는 좋아요 X
-router.post('/upload', (req,res)=>{
+router.post('/upload', async (req,res)=>{
     const {post_contents} = req.body;
     console.log(req.body);
     console.log(req.session);
@@ -23,19 +38,49 @@ router.post('/upload', (req,res)=>{
     const post_createdAt = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');
     // console.log(time);
     const datas = [post_contents,req.session.user_nickname,post_createdAt];
+    db.query('SELECT * FROM user WHERE user_id =? ',req.session.user_id, function(err,results,fields){
+        // console.log(results);
+        const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
+        // console.log(keystore);
+        const address = keystore.getAddresses()[0];
+        // console.log(server_address);
+        let privateKey;
+        console.log(address);
+        keystore.keyFromPassword(results[0].user_password, (err, data) => {
 
-    const sql = "INSERT INTO post (post_contents,post_ID,post_createdAt, post_userImg, post_likes) VALUES(?,?,?,'img',0)";
-    db.query(sql, datas, function(err,rows){
-        if (err) {
-            console.error(err);
-            return res.status(400).send({status:"failed", message:"게시글 작성 실패 : + err"});
-        }
+            const key = keystore.exportPrivateKey(address.toString(), data);
 
-        // 현재 가지고 있는 토큰 갯수 검사
-
-        //충분할 경우
-        else res.status(200).send({status:"success", message:"게시글 작성 완료"});
+            privateKey = '0x' + key;
+            console.log(privateKey);
+            
+            erc20Contract.methods.balanceOf(address).call().then(console.log);
+            erc20Contract.methods.balanceOf(address).call().then(e=>{
+                if(e >= 1) {
+                    const sql = "INSERT INTO post (post_contents,post_ID,post_createdAt, post_userImg, post_likes) VALUES(?,?,?,'img',0)";
+                    db.query(sql, datas, function(err,rows){
+                        if (err) {
+                            console.error(err);
+                            return res.status(400).send({status:"failed", message:"게시글 작성 실패 : "+ err});
+                        }
+                        else {
+                            
+                            res.status(200).send({status:"success", message:"게시글 작성 완료"});
+                            db.query('SELECT * FROM user WHERE user_id = \'server\'',function(err,results){
+                                console.log(address, results[0].user_accountAddress);
+                                return transfer_erc20(address, privateKey, results[0].user_accountAddress,1);
+                            })
+                            
+                        }
+                    })
+                }
+                else{
+                    return res.status(400).send({status:"failed", message:"게시글 작성 실패 : 토큰이 부족합니다."});
+                }
+            })
+        });
     })
+    
+    
 })
 
 router.post('/likes',(req,res)=>{
@@ -64,5 +109,31 @@ router.post('/likes',(req,res)=>{
         })
     });
 })
+
+
+// async function transfer_erc20(address, privateKey,recieveAccount, amount) {
+//     const gasPrice = await web3.eth.getGasPrice();
+//     var txObj = {
+//         nonce: web3.eth.getTransactionCount(address),
+//         gasPrice: gasPrice,
+//         gasLimit: 1000000,
+//         to: erc20ContractAddr,
+//         from: address,
+//         value: '',
+//         data: erc20Contract.methods.transfer(recieveAccount, `${amount}`).encodeABI(),
+//     };
+
+//     const signedTx = await web3.eth.accounts.signTransaction(
+//         txObj,
+//         privateKey,
+//     );
+//     // console.log(txObj);
+//     const transferResult = await web3.eth.sendSignedTransaction(
+//         signedTx.rawTransaction,
+//     );
+//     // console.log(1, transferResult);
+
+//     erc20Contract.methods.balanceOf(address).call().then(console.log);
+// }
 
 module.exports = router;
