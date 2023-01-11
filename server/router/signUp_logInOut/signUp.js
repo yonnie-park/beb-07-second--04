@@ -20,7 +20,7 @@ router.post('/',async (req,res)=>{
 
     db.query('SELECT * FROM user WHERE user_id =? OR user_nickname =?', 
         [user_id, user_nickname], function(err,results,fields){ // 중복 확인
-        // console.log(err, results);
+         //console.log(err, results);
         if(results.length > 0){
             res.status(406).send({status:"failed", message:"ID와 닉네임은 중복할 수 없습니다"})
         }
