@@ -8,8 +8,8 @@ const con = mysql.createConnection(
     host: 'localhost',
     user: 'root',
     password: process.env.DATABASE_PASSWORD,
-    database: 'project2'
-
+    database: 'project2',
+    port: '3306'
   }
 );
 
