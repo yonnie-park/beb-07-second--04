@@ -33,7 +33,8 @@ export default function Login() {
             })
             .then(() => {
                 if(account.isConnected === "true"){
-                    console.log(account.isConnected);
+                    console.log(account.isConnected)
+                    navigate("/");
                 }})
             .catch((e)=>console.log(e))
             
