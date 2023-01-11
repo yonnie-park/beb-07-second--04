@@ -8,13 +8,13 @@ const con = mysql.createConnection(
     host: 'localhost',
     user: 'root',
     password: process.env.DATABASE_PASSWORD,
-    database: 'project2'
-
+    database: 'project2',
+    port: '3306'
   }
 );
 
 con.connect((err) => {
-  //if(err) throw err;
+  if(err) throw err;
   console.log("db init success");
   
 })
