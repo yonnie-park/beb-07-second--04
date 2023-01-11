@@ -9,7 +9,8 @@ export default function Header(){
     const {account, setAccount} = useContext(UserContext)
 
     const handleLogout = async () => {
-        await axios.get("http://localhost:8080/logout")
+        await axios
+            .get("http://localhost:8080/logout")
             .then(setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: false}))
     }
     return(
@@ -19,7 +20,7 @@ export default function Header(){
                 {account.isConnected? 
                 <div className="signupDiv">
                         <Link to="/mypage/:account" className="menu" account={account.user_id}>Mypage</Link>
-                        <button className="loginBTN" onClick={handleLogout()}>Logout</button>
+                        <button className="loginBTN" onClick={handleLogout}>Logout</button>
                 </div>:
                 <div className="signupDiv">
                     <Link to="/login"><button className="loginBTN">Login</button></Link>
