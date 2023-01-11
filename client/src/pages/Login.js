@@ -22,7 +22,6 @@ export default function Login() {
     const navigate = useNavigate()
 
     function handleSubmit(event){
-    
         event.preventDefault();
         if(account.user_id && account.user_password){
             axios.post("http://localhost:8080/login", account)
@@ -30,7 +29,7 @@ export default function Login() {
                 console.log(result.data.status)
                 if(result.data.status==="success") {
                     setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
-                    console.log(account);
+                    navigate("/"); 
             })
             .then(() => {
                 if(account.isConnected === "true"){
