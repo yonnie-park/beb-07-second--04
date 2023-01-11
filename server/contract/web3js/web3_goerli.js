@@ -12,8 +12,10 @@ const ownerAccount = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY); //배�
 const user1Account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY_1); //서버계정
 const user2Account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY_2); //유저계정
 
-const erc20ContractAddr = '0xbAD0B82befD2D258fe5e43a4F96F22fd7ABD3756'; //goerli erc20 CA
-const erc721ContractAddr = '0x374909940038b98e7970b5f29a34cd79d496b5e6'; //goerli erc721 CA
+const beomAccount = '0x9205dc43b9f03e83cc57a9002ef06169ca41441b';
+
+const erc20ContractAddr = '0x8bc08122bEf2C3b1c06c61c9F9dFe023EF592A9e'; //goerli erc20 CA
+const erc721ContractAddr = '0x8e2F396270567e1820e6eBD0e9774D68e8D8c899'; //goerli erc721 CA
 
 var erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
 var erc721Contract = new web3.eth.Contract(erc721_ABI, erc721ContractAddr); //erc721 contract 인스턴스화
@@ -126,11 +128,9 @@ async function transfer_erc20() {
     gasPrice: web3.eth.gasPrice,
     gasLimit: 1000000,
     to: erc20ContractAddr,
-    from: user1Account.address,
+    from: ownerAccount.address,
     value: '',
-    data: erc20Contract.methods
-      .transfer(user2Account.address, '300')
-      .encodeABI(),
+    data: erc20Contract.methods.transfer(beomAccount, '3000').encodeABI(),
   };
 
   try {
@@ -153,11 +153,14 @@ async function transfer_erc20() {
 //balanceOf
 async function balanceOf_erc20() {
   try {
+    const ethBalanceResult = await web3.eth.getBalance(user1Account.address);
+
     const balanceOfResult = await erc20Contract.methods
-      .balanceOf(user2Account.address)
+      .balanceOf(user1Account.address)
       .call();
 
     console.log(balanceOfResult);
+    console.log(ethBalanceResult / 1000000000000000000);
     return balanceOfResult;
   } catch (e) {
     console.log(e);
@@ -551,6 +554,7 @@ async function mintNFT_erc721() {
     data: erc721Contract.methods
       .mintNFT(
         user2Account.address,
+        user1Account.address,
         'https://urclass-images.s3.ap-northeast-2.amazonaws.com/beb/section4/unit4/test.json',
       )
       .encodeABI(),
