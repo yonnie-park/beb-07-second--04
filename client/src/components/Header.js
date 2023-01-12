@@ -28,7 +28,7 @@ export default function Header(){
                     <Link to="/signup"><button className="joinBTN">Sign up</button></Link>
                 </div>:
                 <div className="signupDiv">
-                    <Link to="/mypage/:account" className="menu" account={account.user_id}>Mypage</Link>
+                    <Link to="/mypage" className="menu" account={account.user_id}>Mypage</Link>
                     <button className="loginBTN" onClick={handleLogout}>Logout</button>
                 </div>}
         </div>

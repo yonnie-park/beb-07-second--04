@@ -10,9 +10,9 @@ export default function Mypage() {
     return(
         <div className="container">
             <MyProfile/>
+            <NFTscroll/>
             <SendToken/>
             <MintNFT/>
-            <NFTscroll/>
             <TweetList/>
         </div>
     )

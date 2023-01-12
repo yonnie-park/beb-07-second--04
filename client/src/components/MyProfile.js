@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import "./MyProfile.css"
 import axios from 'axios';
+import {UserContext} from "../UserContext"
 
 export default function MyProfile() {
-  //axios post /mypage
+  const {profilePic} = useContext(UserContext)
+  
   const [userInfo, setUserInfo] = useState({
     user_id: "",
     user_nickname: "",
-    user_profileImg: "",
     user_accountAddress: ""
   })
 
@@ -21,7 +22,7 @@ export default function MyProfile() {
   return (
     <div className='MyProfile'>
           <div className="profileContainer">
-            <img src={userInfo.user_profileImg} alt="profile" id="MyProfilePic"></img>
+            <img src={profilePic} alt="profile" id="MyProfilePic"></img>
             <h1>{userInfo.user_nickname + `(@` + userInfo.user_id + `)`}</h1>
             <span>{userInfo.user_accountAddress}</span>
           </div>
