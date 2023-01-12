@@ -59,3 +59,6 @@
 #signupBTN:disabled{
     opacity: 50%;
 }
+.validationCheck{
+  font-size: 9px;
+}

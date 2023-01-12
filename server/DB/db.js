@@ -14,11 +14,8 @@ const con = mysql.createConnection(
 );
 
 con.connect((err) => {
-<<<<<<< HEAD
-  // if(err) throw err;
-=======
+
   //if(err) throw err;
->>>>>>> c293c7fb51d35802ddab7914c2280b3f321fca5a
   console.log("db init success");
   
 })

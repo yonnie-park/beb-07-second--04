@@ -5,8 +5,8 @@ import axios from "axios";
 import {UserContext} from "../UserContext"
 import {useNavigate} from "react-router-dom"
 
-export default function Header(){
 
+export default function Header(){
     const {account, setAccount} = useContext(UserContext)
     const navigate = useNavigate()
     const handleLogout = async () => {
@@ -19,7 +19,7 @@ export default function Header(){
         <div className="header">
                 <div className="logoDiv"><Link to="/" onClick="location.reload();" className="mainlogo">SNORLAX</Link></div>
                 {/* {account.isConnected? <Link to="/"><button className="loginBTN" onClick={handleLogout()}>Logout</button></Link>:console.log("disconnected")} */}
-                {account.isConnected? 
+                {account.isConnected===false? 
                 <div className="signupDiv">
                         <Link to="/mypage/:account" className="menu" account={account.user_id}>Mypage</Link>
                         <button className="loginBTN" onClick={handleLogout}>Logout</button>

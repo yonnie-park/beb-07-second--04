@@ -1,17 +1,15 @@
 import React from "react";
 import "./NFTitem.css";
-import dummyNFT from "../resources/dummyNFT"
 
-const NFTitem = () => {
+const NFTitem = (e) => {
     return(
-        <div>{dummyNFT.map((e)=>{
+        <div>
             <div id="itemContainer">
                 <img src={e.imgUrl} id="thumbnail" alt="item img"></img>
                 <h4 id="NFTcollection">{e.collection}</h4>
                 <h4 id="NFTname">{e.name}</h4>
                 <p id="NFTprice">{e.price}</p>
             </div>
-        })}
         </div>
         
         
