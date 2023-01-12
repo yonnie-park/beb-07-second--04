@@ -24,13 +24,13 @@ router.get('/', (req, res)=>{
     let sql = 'SELECT * FROM post ORDER BY post_createdAt DESC LIMIT 10';
     db.query(sql, function(err,results,field){
         // console.log(results);
-        if (err) throw err;
+        // if (err) throw err;
         res.status(200).send({status:"success", posts_list:results});
     })
 })
 
 // 업로드는 좋아요 X
-router.post('/', async (req,res)=>{
+router.post('/upload', async (req,res)=>{
     const {post_contents} = req.body;
     console.log(req.body);
     console.log(req.session);
@@ -55,6 +55,7 @@ router.post('/', async (req,res)=>{
             
             // erc20Contract.methods.balanceOf(address).call().then(console.log);
             erc20Contract.methods.balanceOf(address).call().then(e=>{
+                console.log(e);
                 if(e >= 1) {
                     const sql = "INSERT INTO post (post_contents,post_ID,post_createdAt, post_userImg, post_likes) VALUES(?,?,?,'img',0)";
                     db.query(sql, datas, function(err,rows, results){
