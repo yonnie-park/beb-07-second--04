@@ -31,6 +31,7 @@ export default function Login() {
                     setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
                     console.log(account);
                     navigate("/")
+                    
 
             })
             .then(() => {

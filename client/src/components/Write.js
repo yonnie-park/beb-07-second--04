@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import dummyData from "../resources/dummyData"
 import "./Write.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Write() {
+  const notify = () => toast.success("포스트를 완료했습니다");
   const [tweetInfo, setTweetInfo] = useState({
     post_userImg: "", // 게시글 작성자 이미지
     post_ID:"", // 작성자 ID
@@ -18,16 +21,19 @@ export default function Write() {
   }
 
   const handleSubmit = (event) => {
+    
     let isPostSuccess = false
     // event.preventDefault(); 
     if(tweetInfo.post_contents){
       axios.post("http://localhost:8080/posts/upload", tweetInfo)
+      notify()
       .then((result)=>{
         console.log(result.data.status)
         result.data.status==="success"? isPostSuccess=true : isPostSuccess=false
       })
       .then(()=>{
         isPostSuccess ? window.location.reload() : console.log()
+        
       })
     }
   }
@@ -50,7 +56,7 @@ export default function Write() {
           <button type="submit" id="tweetBTN" disabled={!validateForm()}>post</button>
         </form>
       </div>
-      
+      <ToastContainer />
     </div>
     
   );
