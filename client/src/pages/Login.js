@@ -30,10 +30,12 @@ export default function Login() {
             .then((result) => {
                 console.log(result.data.status)
                 if(result.data.status==="success") {
+
                     setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
                     // console.log(account);
                     navigate("/", { state: { account } })
                     // console.log(account);
+
 
             })
             .then(() => {
