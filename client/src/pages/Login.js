@@ -7,11 +7,14 @@ import {useNavigate} from "react-router-dom"
 import "./Login.css"
 import "./style.css"
 import {UserContext} from "../UserContext"
+import profile_sample from "../assets/collectedImg/1.png";
 
 axios.defaults.withCredentials = true;
 
 export default function Login() {
-    const {account, setAccount} = useContext(UserContext)
+    const navigate = useNavigate();
+    const {account, setAccount} = useContext(UserContext);
+
 
     const handleInputValue = (key) => (e) => {
         setAccount({...account, [key]: e.target.value})
@@ -19,7 +22,6 @@ export default function Login() {
     function validateForm(){
         return account.user_id.length>0 && account.user_password.length>0
     }
-    const navigate = useNavigate()
 
     function handleSubmit(event){
         event.preventDefault();
@@ -28,10 +30,12 @@ export default function Login() {
             .then((result) => {
                 console.log(result.data.status)
                 if(result.data.status==="success") {
-                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true", user_nickname: account.user_nickname})}
-                    console.log(account);
-                    navigate("/")
-                    
+
+                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
+                    // console.log(account);
+                    navigate("/", { state: { account } })
+                    // console.log(account);
+
 
             })
             .then(() => {
@@ -42,6 +46,7 @@ export default function Login() {
             
         }
     }
+
     return(
        <div className="container">
         <div id="forms">
