@@ -38,7 +38,7 @@ router.post('/', async(req, res)=>{
 
     db.query('SELECT * FROM user WHERE user_id = \'server\'', function(err,results){
         const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
-        // console.log(keystore);
+        console.log(keystore);
         const server_address = keystore.getAddresses()[0];
         // console.log(server_address);
         let server_privateKey;
