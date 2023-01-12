@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./MyProfile.css"
-import dummyData from "../resources/dummyData"
+import axios from 'axios';
 
 export default function MyProfile() {
+  //axios post /mypage
+  const [userInfo, setUserInfo] = useState({
+    user_id: "",
+    user_nickname: "",
+    user_profileImg: "",
+    user_accountAddress: ""
+  })
+
+  useEffect(()=>{
+    axios.post("http://localhost:8080/mypage")
+    .then((res)=>{
+      setUserInfo(res.data)
+    }).catch((err)=>console.log(err))
+  },[])
+
   return (
     <div className='MyProfile'>
-      {dummyData.map((e)=>{
-        return (
           <div className="profileContainer">
-            <img src={e.imgUrl} alt="profile" id="MyProfilePic"></img>
-            <h1>{e.user_nickname + `(@` + e.user_id + `)`}</h1>
-            <span>0x805352d058Ad7d74F5268440fd48B2C6837F6a33</span>
+            <img src={userInfo.user_profileImg} alt="profile" id="MyProfilePic"></img>
+            <h1>{userInfo.user_nickname + `(@` + userInfo.user_id + `)`}</h1>
+            <span>{userInfo.user_accountAddress}</span>
           </div>
-        )
-      })}
     </div>
     
   );

@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button"
 import "./MintNFT.css"
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {create} from 'ipfs-http-client';
 import Box from '@mui/material/Box';
 
@@ -14,7 +16,7 @@ const projectSecret = '6a9b6c22ef56d8525a14ccdce315c40e';  // <---------- your I
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
 export default function MintNFT() {
-  // const notify = () => toast.success("토큰을 전송했습니다");
+  const notify = () => toast.success("NFT를 민팅했습니다");
   const [mintNFT, setMintNFT]=useState({
     nft_name: "",
     nft_imgURL: ""
@@ -87,6 +89,7 @@ export default function MintNFT() {
       .then((res)=>{
         console.log(res.data.status)
         res.data.status==="success"?isMintSuccess=true:isMintSuccess=false
+        notify()
       })
       .then(()=>{
         isMintSuccess?alert("NFT를 민팅했습니다"):alert("민팅에 실패했습니다")
@@ -107,7 +110,7 @@ export default function MintNFT() {
                         onChange={handleInputValue("nft_name")}
                         type="title"/>
           </Form.Group>
-          <h5>image address</h5>
+          <h5>image upload</h5>
           <Form.Group size="lg">
             {/* <Form.Control
               placeholder="민팅할 이미지 주소를 입력하세요"

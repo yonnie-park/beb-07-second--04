@@ -17,7 +17,9 @@ function App() {
   const [account, setAccount] = useState({
     user_id:"",
     user_password: "",
-    isConnected: false
+    isConnected: false,
+    user_nickname: "",
+    user_account: ""
   });
 
   return (
@@ -26,7 +28,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path ="/" element={<Main />}/>
-          <Route path="/mypage/:account" element={<Mypage account={account}/>}/>
+          <Route path="/mypage" element={<Mypage account={account}/>}/>
           <Route path="/mint" element={<Mint />}/>
           <Route path="/view" element={<View/>}/>
           <Route path="/signup" element={<Signup/>}/>
