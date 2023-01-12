@@ -24,18 +24,23 @@ const transfer_erc20 = async function (address, privateKey,recieveAccount, amoun
         data: erc20Contract.methods.transfer(recieveAccount, `${amount}`).encodeABI(),
     };
 
-    const signedTx = await web3.eth.accounts.signTransaction(
-        txObj,
-        privateKey,
-    );
-    console.log(txObj);
-    const transferResult = await web3.eth.sendSignedTransaction(
-        signedTx.rawTransaction,
-    );
-    // console.log(1, transferResult);
 
-    erc20Contract.methods.balanceOf(address).call().then(console.log);
-    return transferResult;
+    try{
+        const signedTx = await web3.eth.accounts.signTransaction(
+            txObj,
+            privateKey,
+        );
+        console.log(txObj);
+        const transferResult = await web3.eth.sendSignedTransaction(
+            signedTx.rawTransaction,
+        );
+        // console.log(1, transferResult);
+
+        erc20Contract.methods.balanceOf(address).call().then(console.log);
+        return transferResult;
+    }catch(e){
+        console.log(e);
+    }
 }
 
 module.exports = transfer_erc20;
