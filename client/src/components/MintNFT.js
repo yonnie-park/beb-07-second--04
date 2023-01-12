@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button"
 import "./MintNFT.css"
 import axios from 'axios';
 
-
 export default function MintNFT() {
   const [mintNFT, setMintNFT]=useState({
     nft_name: "",
@@ -24,12 +23,12 @@ export default function MintNFT() {
       axios.post("http://localhost:8080/makeNFT", mintNFT)
       .then((res)=>{
         console.log(res.data.status)
-        res.data.status==="Created"?isMintSuccess=true:isMintSuccess=false
+        res.data.status==="success"?isMintSuccess=true:isMintSuccess=false
       })
       .then(()=>{
         isMintSuccess?alert("NFT를 민팅했습니다"):alert("민팅에 실패했습니다")
       }) 
-  }
+    }
   }
     return (
     <div className='mintNFT'>
