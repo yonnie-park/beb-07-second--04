@@ -5,7 +5,7 @@ const router = express.Router();
 const lightwallet = require("eth-lightwallet/");
 const Web3 = require('web3');
 
-let Testmode = 0;
+// let Testmode = 0;
 
 require('dotenv').config();
 const { API_URL } = process.env;
@@ -20,11 +20,11 @@ const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc
 router.post('/', async(req, res)=>{
     const {user_id, user_password} = req.body;
 
-    if(Testmode == 1){
-        req.session.user_id = user_id;
-        req.session.user_nickname = "user_nickname";
-        return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
-    }
+    // if(Testmode == 1){
+    //     req.session.user_id = user_id;
+    //     req.session.user_nickname = "user_nickname";
+    //     return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
+    // }
 
     
     // console.log(req.body);
@@ -38,7 +38,7 @@ router.post('/', async(req, res)=>{
 
     db.query('SELECT * FROM user WHERE user_id = \'server\'', function(err,results){
         const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
-        // console.log(keystore);
+        console.log(keystore);
         const server_address = keystore.getAddresses()[0];
         // console.log(server_address);
         let server_privateKey;
