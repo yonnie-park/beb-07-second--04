@@ -1,10 +1,9 @@
-import React from 'react';
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import React, {useContext} from 'react';
 import NFTitem from './NFTitem';
 import dummyNFT from "../resources/dummyNFT"
+import { UserContext } from '../UserContext';
 import "./NFTscroll.css"
 export default function NFTscroll() {
-    
     return(
         <div className='thiscontainer'>
         <div className='NFTcontainer'>
