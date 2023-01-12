@@ -3,11 +3,13 @@ const router = express.Router();
 const db = require('../../DB/db');
 
 router.post('/', async(req, res)=>{
-    const {user_id} = req.body;
+    const user_id = req.session.user_id;
+    console.log(req.session.user_id);
+    console.log(user_id);
     let sql = 'SELECT * FROM user WHERE user_id = ?';
     db.query(sql, user_id, function(err,results){
         console.log(results);
-        if (err) throw err;
+        if (err) console.log(err);
         const {user_accountAddress, user_nickname, user_profileImg} = results[0];
         sql = 'SELECT * FROM post WHERE post_ID = ? ORDER BY post_createdAt DESC LIMIT 5';
         db.query(sql,user_nickname,function(err,results){

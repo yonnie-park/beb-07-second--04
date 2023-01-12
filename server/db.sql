@@ -34,13 +34,13 @@ CREATE TABLE likes (
 );
 
 CREATE TABLE nft (
-    `user_nfts` varchar(255) PRIMARY KEY,
+    `user_nfts` varchar(255),
     `metadata` varchar(255) not NULL,
     `nft_imgURL` varchar(255) not NULL,
 );
 
 CREATE TABLE token (
     `id` varchar(255) PRIMARY KEY,
-    `sendToken_Address` varchar(255)
+    `sendToken_Address` varchar(255),
 );
 

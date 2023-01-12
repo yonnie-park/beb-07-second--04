@@ -17,6 +17,10 @@
     border-radius: 100%;
     object-fit: cover; 
 }
+#MyProfilePic:hover{
+    cursor: pointer;
+    opacity:0.5;
+}
 
 .profileContainer{
     display: flex;

@@ -1,9 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dummyData from "../resources/dummyData"
 import "./Write.css"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import profile_sample from "../assets/collectedImg/2.png";
 
-export default function Write() {
+
+export default function Write( props ) {
+  // const notify = () => toast.success("포스트를 완료했습니다");
   const [tweetInfo, setTweetInfo] = useState({
     post_userImg: "", // 게시글 작성자 이미지
     post_ID:"", // 작성자 ID
@@ -18,43 +23,47 @@ export default function Write() {
   }
 
   const handleSubmit = (event) => {
+    
     let isPostSuccess = false
-    event.preventDefault();
+    event.preventDefault(); 
     if(tweetInfo.post_contents){
+      console.log(tweetInfo);
       axios.post("http://localhost:8080/posts/upload", tweetInfo)
+      // notify()
       .then((result)=>{
         console.log(result.data.status)
         result.data.status==="success"? isPostSuccess=true : isPostSuccess=false
       })
       .then(()=>{
         isPostSuccess ? window.location.reload() : console.log()
+        
       })
     }
   }
   function validateForm(){
     return tweetInfo.post_contents.length>0
 }
-  return (
-    <div className='write'>
-      <div >
-        {dummyData.map((e)=>{
-          return(
-            <div id='profile'>
-              <img id="profPic" src={e.imgUrl} alt="profile"/>
-              <div id="name">{e.user_nickname}</div>
-              <div id="userid">{`@`+ e.user_id}</div>
-            </div>
-          )
-        })}
-      </div>
-      <div id="tweetForm">
-        <form onSubmit={handleSubmit} id="form" autofocus>
-          <textarea placeholder="write something..." value={tweetInfo.post_contents} onChange={handleChange("post_contents")} id="tweetbox"/>
-          <button type="submit" id="tweetBTN" disabled={!validateForm()}>post</button>
-        </form>
-      </div>
-      
+return (
+  <div className='write'>
+    <div >
+      {dummyData.map((e)=>{
+        return(
+          <div id='profile'>
+            <img id="profPic" src={profile_sample} alt="profile"/>
+            {/* <div id="name">{e.user_nickname}</div> */}
+            <div id="userid">{`@`+ props.user_id}</div>
+          </div>
+        )
+      })}
+    </div>
+    <div id="tweetForm">
+      <form onSubmit={handleSubmit} id="form" autofocus>
+        <textarea placeholder="write something..." value={tweetInfo.post_contents} onChange={handleChange("post_contents")} id="tweetbox"/>
+        <button type="submit" id="tweetBTN" disabled={!validateForm()}>post</button>
+      </form>
     </div>
     
-  );
+  </div>
+  
+);
 }

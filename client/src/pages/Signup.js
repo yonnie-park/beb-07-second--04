@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { useNavigate } from "react-router-dom";
 import "./Signup.css"
+
 axios.defaults.withCredentials = true;
 
 export default function Signup() {
@@ -36,7 +37,7 @@ export default function Signup() {
                 result.data.status==="success"? isSigninSuccess=true : isSigninSuccess=false
             })
             .then(()=>{
-                isSigninSuccess? navigate('/') : console.log("failed")
+                isSigninSuccess? navigate('/') : alert("failed")
             }).catch((e)=>console.log(e))
         }
     }
@@ -56,7 +57,7 @@ export default function Signup() {
                             type="text"
                             value={userInfo.user_id} 
                             onChange={handleInputValue("user_id")} />
-                    </Form.Group>
+                    </Form.Group> 
                     <Form.Group size="lg">
                         <Form.Control
                             placeholder="비밀번호를 입력하세요"
