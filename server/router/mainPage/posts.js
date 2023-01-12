@@ -30,7 +30,7 @@ router.get('/', (req, res)=>{
 })
 
 // 업로드는 좋아요 X
-router.post('/upload', async (req,res)=>{
+router.post('/', async (req,res)=>{
     const {post_contents} = req.body;
     console.log(req.body);
     console.log(req.session);
@@ -57,7 +57,8 @@ router.post('/upload', async (req,res)=>{
             erc20Contract.methods.balanceOf(address).call().then(e=>{
                 if(e >= 1) {
                     const sql = "INSERT INTO post (post_contents,post_ID,post_createdAt, post_userImg, post_likes) VALUES(?,?,?,'img',0)";
-                    db.query(sql, datas, function(err,rows){
+                    db.query(sql, datas, function(err,rows, results){
+                        console.log(results);
                         if (err) {
                             console.error(err);
                             return res.status(400).send({status:"failed", message:"게시글 작성 실패 : "+ err});
