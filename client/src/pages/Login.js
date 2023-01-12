@@ -28,7 +28,7 @@ export default function Login() {
             .then((result) => {
                 console.log(result.data.status)
                 if(result.data.status==="success") {
-                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true"})}
+                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: "true", user_nickname: account.user_nickname})}
                     console.log(account);
                     navigate("/")
                     

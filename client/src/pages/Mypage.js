@@ -1,5 +1,4 @@
 import { React, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import NFTscroll from "../components/NFTscroll";
 import MyProfile from "../components/MyProfile";
 import SendToken from "../components/SendToken";
