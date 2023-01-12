@@ -24,7 +24,7 @@ router.get('/', (req, res)=>{
     let sql = 'SELECT * FROM post ORDER BY post_createdAt DESC LIMIT 10';
     db.query(sql, function(err,results,field){
         // console.log(results);
-        if (err) throw err;
+        if (err) console.log(err);
         res.status(200).send({status:"success", posts_list:results});
     })
 })
