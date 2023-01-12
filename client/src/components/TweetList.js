@@ -1,36 +1,34 @@
-import React, { useState,useEffect } from "react";
-import Tweet from "./Tweet.js"
-import axios from "axios"
+import React from "react";
+import Tweet from "./Tweet.js";
+import axios from "axios";
+import profile_sample from "../assets/collectedImg/1.png";
+import { useState, useEffect } from "react";
 
-export default function TweetList(){
+export default function TweetList() {
+  const [postInfo, setPostInfo] = useState([]);
 
-const [postInfo, setPostInfo] = useState({
-    post_contents: "", // 게시물 내용
-    post_createdAt: "", // 게시물 시간
-    post_ID: "", // 게시글 작성자 ID
-    post_userImg: "", // 게시글 작성자 프로필 이미지
-    post_likes: "" // 게시글 좋아요 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/posts")
+      .then((result) => {
+        setPostInfo([...result.data.posts_list]);
       })
+      .catch((err) => console.log(err));
+  }, []);
 
-useEffect(()=> {
-    axios.get("http://localhost:8080/posts", postInfo)
-    .then((result)=>{
-    setPostInfo(result.data);
-    })
-    .catch((err)=>console.log(err))
-}, []);
-
-return(
-    // <div value={postInfo}></div> 
-    <div>
-        <Tweet/>
-        <Tweet/>
-        <Tweet/>
-        <Tweet/>
-        <Tweet/>
-        <Tweet/>
-        <Tweet/>
-        <Tweet/>     
+  return (
+    <div className="TweetsContainer">
+      {postInfo.map((post) => (
+        <div className="Tweets" key={post.id}>
+          <Tweet
+            post_contents={post.post_contents}
+            post_createdAt={post.post_createdAt}
+            post_ID={post.post_ID}
+            post_userImg={profile_sample}
+            post_likes={post.post_likes}
+          />
         </div>
-    )
+      ))}
+    </div>
+  );
 }
