@@ -3,9 +3,11 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import "./MintNFT.css"
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MintNFT() {
+  const notify = () => toast.success("토큰을 전송했습니다");
   const [mintNFT, setMintNFT]=useState({
     nft_name: "",
     ipfs_img_url: ""
@@ -21,6 +23,7 @@ export default function MintNFT() {
     let isMintSuccess=false
     event.preventDefault()
     if(mintNFT.ipfs_img_url && mintNFT.nft_name){
+      notify()
       axios.post("http://localhost:8080/makeNFT", mintNFT)
       .then((res)=>{
         console.log(res.data.status)
@@ -60,6 +63,7 @@ export default function MintNFT() {
                     Mint
           </Button>
         </Form>
+        <ToastContainer/>
     </div>
     
   );

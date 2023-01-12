@@ -3,7 +3,12 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import "./SendToken.css"
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export default function SendToken() {
+  const notify = () => toast.success("토큰을 전송했습니다");
   const [sendInfo, setSendInfo] = useState({
     nft_recipient: "",
     nft_amount: ""
@@ -23,6 +28,7 @@ export default function SendToken() {
       .then((res)=>{
         console.log(res.data.status)
         res.data.status==="OK"?isSendSuccess=true:isSendSuccess=false
+        notify()
       })
       .then(()=>{
         isSendSuccess?alert("토큰을 전송했습니다"):alert("토큰을 전송하지 못했습니다")
@@ -56,6 +62,7 @@ export default function SendToken() {
                     전송하기
           </Button>
         </Form>
+        <ToastContainer/>
     </div>
     
   );
