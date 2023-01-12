@@ -5,25 +5,26 @@ const router = express.Router();
 const lightwallet = require("eth-lightwallet/");
 const Web3 = require('web3');
 
-// let Testmode = 0;
+let Testmode = 0;
 
 require('dotenv').config();
-const { API_URL, erc20ContractAddr } = process.env;
+const { API_URL } = process.env;
 
 const { erc20_ABI } = require('../../contract/web3js/ABI');
 
 const web3 = new Web3(new Web3.providers.HttpProvider(API_URL)); //ganache provider
-// const erc20ContractAddr = '0x8bc08122bEf2C3b1c06c61c9F9dFe023EF592A9e'; //ganache erc20 CA
+
+const erc20ContractAddr = '0xe9FA229F8737f43BaBF747fBf76D821fB7Cb9a1A'; //ganache erc20 CA
 const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
 
 router.post('/', async(req, res)=>{
     const {user_id, user_password} = req.body;
 
-    // if(Testmode == 1){
-    //     req.session.user_id = user_id;
-    //     req.session.user_nickname = "user_nickname";
-    //     return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
-    // }
+    if(Testmode == 1){
+        req.session.user_id = user_id;
+        req.session.user_nickname = "user_nickname";
+        return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
+    }
 
     
     // console.log(req.body);
@@ -33,7 +34,7 @@ router.post('/', async(req, res)=>{
     const timeSplit = time.split('-');
     const year = timeSplit[0];
     const month = timeSplit[1];
-    const day = timeSplit[2]+1;
+    const day = timeSplit[2];
 
     db.query('SELECT * FROM user WHERE user_id = \'server\'', function(err,results){
         const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
@@ -82,9 +83,11 @@ router.post('/', async(req, res)=>{
                 else{
                     return res.status(200).send({status:"success", message: "로그인을 환영합니다."})
                 }
+                
             });
         });
     });
+
 
     async function transfer_erc20(server_address, server_privateKey,recieveAccount) {
         const gasPrice = await web3.eth.getGasPrice();
