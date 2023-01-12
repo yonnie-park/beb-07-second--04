@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dummyData from "../resources/dummyData"
 import "./Write.css"
 
@@ -19,7 +19,7 @@ export default function Write() {
 
   const handleSubmit = (event) => {
     let isPostSuccess = false
-    event.preventDefault();
+    // event.preventDefault(); 
     if(tweetInfo.post_contents){
       axios.post("http://localhost:8080/posts/upload", tweetInfo)
       .then((result)=>{
@@ -37,15 +37,12 @@ export default function Write() {
   return (
     <div className='write'>
       <div >
-        {dummyData.map((e)=>{
           return(
             <div id='profile'>
-              <img id="profPic" src={e.imgUrl} alt="profile"/>
-              <div id="name">{e.user_nickname}</div>
-              <div id="userid">{`@`+ e.user_id}</div>
+              <img id="profPic" onChange={handleChange("post_userImg")} alt="profile"/>
+              <div id="userid" onChange={handleChange("post_userID")}></div>
             </div>
           )
-        })}
       </div>
       <div id="tweetForm">
         <form onSubmit={handleSubmit} id="form" autofocus>
