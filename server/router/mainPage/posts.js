@@ -9,13 +9,13 @@ const Web3 = require('web3');
 const transfer_erc20 = require('../contract');
 
 require('dotenv').config();
-const { API_URL } = process.env;
+const { API_URL , erc20ContractAddr} = process.env;
 
 const { erc20_ABI } = require('../../contract/web3js/ABI');
 
 const web3 = new Web3(new Web3.providers.HttpProvider(API_URL)); //ganache provider
 
-const erc20ContractAddr = '0xe9FA229F8737f43BaBF747fBf76D821fB7Cb9a1A'; //ganache erc20 CA
+// const  = '0x8bc08122bEf2C3b1c06c61c9F9dFe023EF592A9e'; //ganache erc20 CA
 const erc20Contract = new web3.eth.Contract(erc20_ABI, erc20ContractAddr); //erc20 contract 인스턴스화
 
 
@@ -105,21 +105,21 @@ router.post('/likes',(req,res)=>{
                             if(likes % 10 == 0){
                                 res.status(200).send({status:"success", post_likes:likes})
                                 db.query('SELECT * FROM user WHERE user_id=\'server\'',function(err,results){
-                                    console.log(results);
+                                    // console.log(results);
                                     const keystore = lightwallet.keystore.deserialize(results[0].user_keystore);
-                                    console.log(keystore);
+                                    // console.log(keystore);
                                     const address = keystore.getAddresses()[0];
                                     // console.log(server_address);
                                     let privateKey;
-                                    console.log(address);
+                                    // console.log(address);
                                     keystore.keyFromPassword(results[0].user_password, (err, data) => {
 
                                         const key = keystore.exportPrivateKey(address.toString(), data);
 
                                         privateKey = '0x' + key;
-                                        console.log(privateKey);
+                                        // console.log(privateKey);
                                         db.query('SELECT * FROM user WHERE user_id = ?',user_id,function(err,results){
-                                            console.log(results[0]);
+                                            // console.log(results[0]);
                                             return transfer_erc20(address, privateKey, results[0].user_accountAddress,1);
                                         })
                                     });

@@ -7,9 +7,6 @@ const lightwallet = require("eth-lightwallet/");
 const fs = require('fs');
 const { resourceLimits } = require('worker_threads');
 
-
-
-
 router.post('/',async (req,res)=>{
     const {user_id,user_password,user_nickname} = req.body;
     console.log(user_id,user_password,user_nickname);
