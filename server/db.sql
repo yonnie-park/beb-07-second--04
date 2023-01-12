@@ -34,7 +34,7 @@ CREATE TABLE likes (
 );
 
 CREATE TABLE nft (
-    `user_nfts` varchar(255) PRIMARY KEY,
+    `user_nfts` varchar(255),
     `metadata` varchar(255) not NULL,
     `nft_imgURL` varchar(255) not NULL,
 );
