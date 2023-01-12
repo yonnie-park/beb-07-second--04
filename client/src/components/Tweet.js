@@ -33,23 +33,20 @@ export default function Tweet() {
     <Link to="/view" id='tweetComponent'>
     <div className='tweet'>
     <div >
-      {dummyData.map((e)=>{
         return(
           <div id='contentCover'>
             <div id="profile">
-              <img id="profPic" src={e.imgUrl} alt="profile"/>
-              <div id="name">{e.user_nickname}</div>
-              <div id="userid">{`@`+ e.user_id}</div>
-              <div id="createdAt">{`2022.01.08`}</div>
+              <img id="profPic" value={postInfo.post_userImg} alt="profile"/>
+              <div id="userid" value={postInfo.post_ID} ></div>
+              <div id="createdAt"value={postInfo.post_createdAt}></div>
             </div>
-            <div id="content">{e.content}</div>
+            <div id="content" value={postInfo.post_contents}></div>
             
             <div className='like'>
               <button onClick={clickHeart} className="hvr-pulse" ><HeartFilled style={{color: "#e63946", fontSize: "20px"}}/></button>
             </div>
           </div>
         )
-      })}
     </div>
     
   </div></Link>

@@ -25,6 +25,7 @@ export default function Write() {
     let isPostSuccess = false
     // event.preventDefault(); 
     if(tweetInfo.post_contents){
+      console.log(tweetInfo);
       axios.post("http://localhost:8080/posts/upload", tweetInfo)
       notify()
       .then((result)=>{
@@ -45,8 +46,8 @@ export default function Write() {
       <div >
           return(
             <div id='profile'>
-              <img id="profPic" onChange={handleChange("post_userImg")} alt="profile"/>
-              <div id="userid" onChange={handleChange("post_userID")}></div>
+              {/* <img id="profPic" onChange={handleChange("post_userImg")} alt="profile"/> */}
+              <div id="userid" ></div>
             </div>
           )
       </div>

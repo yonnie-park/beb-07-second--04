@@ -12,8 +12,11 @@ export default function Header(){
     const handleLogout = async () => {
         await axios
             .get("http://localhost:8080/logout")
-            .then(setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: false}))
-            .then(navigate("/"))
+            .then((e)=>{
+                if(e.data.status === 'success'){
+                    setAccount({user_id: account.user_id, user_password: account.user_password, isConnected: false})
+                }
+            }).then(navigate("/"))
     }
     return(
         <div className="header">
@@ -21,12 +24,12 @@ export default function Header(){
                 {/* {account.isConnected? <Link to="/"><button className="loginBTN" onClick={handleLogout()}>Logout</button></Link>:console.log("disconnected")} */}
                 {account.isConnected===false? 
                 <div className="signupDiv">
-                        <Link to="/mypage/:account" className="menu" account={account.user_id}>Mypage</Link>
-                        <button className="loginBTN" onClick={handleLogout}>Logout</button>
-                </div>:
-                <div className="signupDiv">
                     <Link to="/login"><button className="loginBTN">Login</button></Link>
                     <Link to="/signup"><button className="joinBTN">Sign up</button></Link>
+                </div>:
+                <div className="signupDiv">
+                    <Link to="/mypage/:account" className="menu" account={account.user_id}>Mypage</Link>
+                    <button className="loginBTN" onClick={handleLogout}>Logout</button>
                 </div>}
         </div>
     )
