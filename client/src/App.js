@@ -22,9 +22,11 @@ function App() {
     user_account: ""
   });
 
+  const[profilePic, setProfilePic]=useState("")
+
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{account, setAccount}}>
+      <UserContext.Provider value={{account, setAccount, profilePic, setProfilePic}}>
         <Header/>
         <Routes>
           <Route path ="/" element={<Main />}/>
