@@ -37,7 +37,7 @@ export default function MyProfile() {
     <div className='MyProfile'>
           <div className="profileContainer">
             <img src={profilePic} alt="profile" id="MyProfilePic"></img>
-            <h1>{userInfo.user_nickname + `(@` + userInfo.user_id + `)`}</h1>
+            <h1>{userInfo.user_nickname }</h1>
             <span>{userInfo.user_accountAddress}</span>
           </div>
     </div>
