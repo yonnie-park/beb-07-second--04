@@ -135,7 +135,7 @@ export default function MintNFT() {
                     Mint
           </Button>
         </Form>
-        {/* <ToastContainer/> */}
+        <ToastContainer/>
     </div>
     
   );

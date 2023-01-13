@@ -13,7 +13,7 @@ export default function Mypage() {
             <NFTscroll/>
             <SendToken/>
             <MintNFT/>
-            <TweetList/>
+
         </div>
     )
 }
